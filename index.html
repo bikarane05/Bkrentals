@@ -189,18 +189,18 @@
                     <div class="p-4 bg-slate-950/80 rounded-2xl border border-slate-800 text-center">
                         <i class="fa-solid fa-phone text-brand-500 text-2xl mb-3"></i>
                         <h4 class="text-xs uppercase font-bold text-slate-400 mb-1" data-i18n="contactPhoneLabel">TÉLÉPHONE / WHATSAPP</h4>
-                        <p class="text-slate-200 text-sm font-medium" id="displayPhone">+212696208343</p>
+                        <p class="text-slate-200 text-sm font-medium" id="displayPhone">+212671688844</p>
                     </div>
 
                     <div class="p-4 bg-slate-950/80 rounded-2xl border border-slate-800 text-center">
                         <i class="fa-solid fa-clock text-brand-500 text-2xl mb-3"></i>
                         <h4 class="text-xs uppercase font-bold text-slate-400 mb-1" data-i18n="contactHoursLabel">HORAIRES</h4>
-                        <p class="text-slate-200 text-sm font-medium" id="displayHours">08:00 - 22:00 (7j/7)</p>
+                        <p class="text-slate-200 text-sm font-medium" id="displayHours">09:00 - 21:00 (7j/7)</p>
                     </div>
                 </div>
 
                 <div class="text-center">
-                    <a id="directWhatsappBtn" href="https://wa.me/212696208343" target="_blank" class="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-base transition shadow-lg shadow-emerald-600/25">
+                    <a id="directWhatsappBtn" href="https://wa.me/212671688844" target="_blank" class="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-base transition shadow-lg shadow-emerald-600/25">
                         <i class="fa-brands fa-whatsapp text-2xl"></i>
                         <span data-i18n="contactBtn">Discuter sur WhatsApp</span>
                     </a>
@@ -252,7 +252,7 @@
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-slate-300 uppercase mb-1" data-i18n="formPhone">Téléphone / WhatsApp</label>
-                            <input type="tel" id="bookPhone" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500" placeholder="+212 696208343">
+                            <input type="tel" id="bookPhone" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500" placeholder="+212671688844">
                         </div>
                     </div>
 
@@ -437,7 +437,7 @@
         // Master Application State with Default Values Hardcoded
         const DEFAULT_DATA = {
             companyName: "BK MOTO",
-            phone: "+212696208343",
+            phone: "+212671688844",
             address: "Hay Ait Soual, Tamraght Ouzdar, Aourir",
             hours: "08:00 - 22:00 (7j/7)",
             adminPin: "1234",
@@ -578,7 +578,7 @@
             document.getElementById('heroBrandName').textContent = appData.companyName || "BK MOTO";
             document.getElementById('footerBrandName').textContent = appData.companyName || "BK MOTO";
             document.getElementById('displayAddress').textContent = appData.address || "Hay Ait Soual, Tamraght Ouzdar, Aourir";
-            document.getElementById('displayPhone').textContent = appData.phone || "+212696208343";
+            document.getElementById('displayPhone').textContent = appData.phone || "+212671688844";
             document.getElementById('displayHours').textContent = appData.hours || "08:00 - 22:00 (7j/7)";
             document.getElementById('footerYear').textContent = new Date().getFullYear();
 
@@ -803,7 +803,7 @@
                 document.getElementById('btnFleetTab').className = "px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs hover:bg-slate-700";
 
                 document.getElementById('adminSettingBrand').value = appData.companyName || "BK MOTO";
-                document.getElementById('adminSettingPhone').value = appData.phone || "+212696208343";
+                document.getElementById('adminSettingPhone').value = appData.phone || "+212671688844";
                 document.getElementById('adminSettingAddress').value = appData.address || "Hay Ait Soual, Tamraght Ouzdar, Aourir";
                 document.getElementById('adminSettingHours').value = appData.hours || "08:00 - 22:00 (7j/7)";
                 document.getElementById('adminSettingPin').value = appData.adminPin || "1234";
@@ -932,7 +932,7 @@
 
         function saveAdminSettings() {
             appData.companyName = document.getElementById('adminSettingBrand').value || "BK MOTO";
-            appData.phone = document.getElementById('adminSettingPhone').value || "+212696208343";
+            appData.phone = document.getElementById('adminSettingPhone').value || "+212671688844";
             appData.address = document.getElementById('adminSettingAddress').value || "Hay Ait Soual, Tamraght Ouzdar, Aourir";
             appData.hours = document.getElementById('adminSettingHours').value || "08:00 - 22:00 (7j/7)";
             appData.adminPin = document.getElementById('adminSettingPin').value || "1234";
