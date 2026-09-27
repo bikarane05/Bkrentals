@@ -449,11 +449,11 @@
                     price4d: 170
                 },
                 {
-                    id: "scooter_2",
+                    id: "scooter_2_fixed",
                     name: "Austin Rebecca S",
                     year: "2026",
-                    image: <img src="https://i.ibb.co/Zp6P8QX3/IMG-2300.jpg" alt="Austin Rebecca S">
-description: "Scooter robuste et confortable à deux, idéal pour visiter Taghazout, Aourir et la région.",
+                    image: "https://i.ibb.co/6RkWbfL/IMG-2300.jpg",
+                    description: "Scooter robuste et confortable à deux, idéal pour visiter Taghazout, Aourir et la région.",
                     price1d: 200,
                     price2_3d: 200,
                     price4d: 170
@@ -546,16 +546,9 @@ description: "Scooter robuste et confortable à deux, idéal pour visiter Taghaz
         let bookingRefCurrent = '';
 
         function loadAppData() {
-            try {
-                const saved = localStorage.getItem('bk_moto_master_data');
-                if (saved) {
-                    appData = JSON.parse(saved);
-                } else {
-                    appData = JSON.parse(JSON.stringify(DEFAULT_DATA));
-                }
-            } catch (e) {
-                appData = JSON.parse(JSON.stringify(DEFAULT_DATA));
-            }
+            localStorage.removeItem('bk_moto_master_data');
+            sessionStorage.removeItem('bk_moto_master_data');
+            appData = JSON.parse(JSON.stringify(DEFAULT_DATA));
         }
 
         function saveAppData() {
