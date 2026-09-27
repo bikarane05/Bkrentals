@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ScootGo - Electric Scooter Rentals & Fleet Management</title>
+    <title>BK MOTO - Location Scooter Agadir & Tamraght</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
+    <!-- Google Fonts Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
@@ -16,11 +16,12 @@
                 extend: {
                     colors: {
                         brand: {
-                            50: '#f0fdf4',
-                            100: '#dcfce7',
-                            500: '#22c55e',
-                            600: '#16a34a',
-                            700: '#15803d',
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            900: '#78350f',
                         }
                     },
                     fontFamily: {
@@ -32,897 +33,922 @@
     </script>
     <style>
         .glass-nav {
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(15, 23, 42, 0.88);
             backdrop-filter: blur(12px);
-        }
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col selection:bg-brand-500 selection:text-black">
 
-    <!-- Navigation Bar -->
-    <header class="sticky top-0 z-50 glass-nav border-b border-slate-200/80 transition-all duration-300">
+    <!-- Navigation Header -->
+    <header class="fixed top-0 left-0 right-0 z-40 glass-nav border-b border-slate-800/80 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <!-- Brand Logo -->
-                <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('fleet')">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center text-white shadow-lg shadow-brand-500/30">
-                        <i class="fa-solid font-bold fa-bolt text-xl"></i>
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo & Brand -->
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-amber-400 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shadow-brand-500/20">
+                        BK
                     </div>
                     <div>
-                        <span class="text-xl font-extrabold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">ScootGo</span>
-                        <span class="text-xs block text-brand-600 font-semibold tracking-wider uppercase -mt-1" data-i18n="tagline">Urban Mobility</span>
+                        <span class="text-xl font-black tracking-wider text-white block leading-none" id="navBrandName">BK MOTO</span>
+                        <span class="text-[10px] font-semibold text-brand-500 tracking-widest uppercase">Rental Agadir</span>
                     </div>
                 </div>
 
-                <!-- Desktop Nav Navigation -->
-                <nav class="hidden md:flex items-center gap-1">
-                    <button onclick="switchTab('fleet')" id="nav-fleet" class="px-4 py-2 rounded-lg font-medium text-sm transition-colors text-brand-600 bg-brand-50">
-                        <i class="fa-solid font-normal fa-motorcycle mr-2"></i><span data-i18n="navFleet">Explore Fleet</span>
+                <!-- Navigation Actions -->
+                <div class="flex items-center gap-3 sm:gap-4">
+                    <button onclick="scrollToSection('fleet')" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-sm font-medium transition text-slate-200">
+                        <i class="fa-solid fa-motorcycle text-brand-500"></i>
+                        <span data-i18n="navFlotte">Nos Scooters</span>
                     </button>
-                    <button onclick="switchTab('calculator')" id="nav-calculator" class="px-4 py-2 rounded-lg font-medium text-sm transition-colors text-slate-600 hover:text-slate-900 hover:bg-slate-100">
-                        <i class="fa-solid font-normal fa-calculator mr-2"></i><span data-i18n="navCalc">Fare Estimator</span>
+                    <button onclick="scrollToSection('contact')" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-sm font-medium transition text-slate-200">
+                        <i class="fa-solid fa-location-dot text-brand-500"></i>
+                        <span data-i18n="navContact">Contact</span>
                     </button>
-                    <button onclick="switchTab('admin')" id="nav-admin" class="px-4 py-2 rounded-lg font-medium text-sm transition-colors text-slate-600 hover:text-slate-900 hover:bg-slate-100">
-                        <i class="fa-solid font-normal fa-sliders mr-2"></i><span data-i18n="navAdmin">Fleet Management</span>
-                    </button>
-                </nav>
-
-                <!-- Actions Controls -->
-                <div class="flex items-center gap-3">
+                    
                     <!-- Language Switcher -->
-                    <div class="relative">
-                        <button onclick="toggleLangDropdown()" class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-all">
-                            <i class="fa-solid fa-globe text-slate-400"></i>
-                            <span id="current-lang-label">EN</span>
-                            <i class="fa-solid fa-chevron-down text-[10px] text-slate-400"></i>
-                        </button>
-                        <div id="lang-dropdown" class="hidden absolute right-0 mt-2 w-32 bg-white rounded-xl shadow-xl border border-slate-100 py-1 z-50">
-                            <button onclick="setLanguage('en')" class="w-full text-left px-4 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 flex items-center justify-between">
-                                English <span class="text-slate-400 text-[10px]">EN</span>
-                            </button>
-                            <button onclick="setLanguage('es')" class="w-full text-left px-4 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 flex items-center justify-between">
-                                Español <span class="text-slate-400 text-[10px]">ES</span>
-                            </button>
-                            <button onclick="setLanguage('fr')" class="w-full text-left px-4 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 flex items-center justify-between">
-                                Français <span class="text-slate-400 text-[10px]">FR</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <button onclick="openBookingModal()" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-lg text-sm font-semibold shadow-md shadow-brand-500/20 transition-all transform hover:-translate-y-0.5">
-                        <i class="fa-solid fa-bolt"></i> <span data-i18n="quickRide">Quick Book</span>
+                    <button id="langToggleBtn" onclick="toggleLanguage()" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold transition flex items-center gap-2 text-amber-400 border border-slate-700">
+                        <i class="fa-solid fa-globe"></i>
+                        <span id="currentLangText">FR 🇫🇷</span>
                     </button>
 
-                    <!-- Mobile Menu Trigger -->
-                    <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-slate-600 hover:bg-slate-100 rounded-lg">
-                        <i class="fa-solid fa-bars text-xl"></i>
+                    <!-- Direct Reserve CTA -->
+                    <button onclick="openBookingModal()" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-brand-500 to-amber-500 hover:from-brand-600 hover:to-amber-600 text-slate-950 font-bold text-sm shadow-md shadow-brand-500/20 transition transform active:scale-95">
+                        <i class="fa-solid fa-calendar-check mr-1.5"></i>
+                        <span data-i18n="navBook">Réserver</span>
                     </button>
                 </div>
             </div>
-        </div>
-
-        <!-- Mobile Navigation Menu -->
-        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white px-4 pt-2 pb-4 space-y-1">
-            <button onclick="switchTab('fleet'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50">
-                <i class="fa-solid fa-motorcycle w-6"></i><span data-i18n="navFleet">Explore Fleet</span>
-            </button>
-            <button onclick="switchTab('calculator'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50">
-                <i class="fa-solid fa-calculator w-6"></i><span data-i18n="navCalc">Fare Estimator</span>
-            </button>
-            <button onclick="switchTab('admin'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50">
-                <i class="fa-solid fa-sliders w-6"></i><span data-i18n="navAdmin">Fleet Management</span>
-            </button>
         </div>
     </header>
 
-    <!-- Main Content Dynamic Container -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-gradient-to-b from-slate-900 to-slate-950">
+        <div class="absolute inset-0 z-0 opacity-20 bg-[radial-gradient(#f59e0b_1px,transparent_1px)] [background-size:24px_24px]"></div>
         
-        <!-- SECTION 1: FLEET VIEW -->
-        <section id="tab-fleet" class="space-y-8">
-            <!-- Hero Banner -->
-            <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-slate-800 to-brand-950 text-white p-8 sm:p-12 shadow-2xl">
-                <div class="relative z-10 max-w-2xl space-y-4">
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-brand-500/20 text-brand-400 border border-brand-500/30">
-                        <i class="fa-solid fa-leaf text-xs"></i> 100% Zero Emission Fleet
-                    </span>
-                    <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight" data-i18n="heroTitle">
-                        Ride Through Your City Effortlessly & Green
-                    </h1>
-                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed" data-i18n="heroSub">
-                        Unlock high-performance electric scooters around you. Flexible hourly rates, instant unlocks, and premium battery life.
-                    </p>
-                    <div class="pt-2 flex flex-wrap gap-4">
-                        <a href="#scooter-grid" class="px-6 py-3 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded-xl shadow-lg shadow-brand-500/30 transition-all text-sm inline-flex items-center gap-2">
-                            <span data-i18n="viewFleetBtn">Browse Available Scooters</span>
-                            <i class="fa-solid fa-arrow-down"></i>
-                        </a>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs sm:text-sm font-semibold mb-6">
+                <i class="fa-solid fa-star text-amber-400"></i>
+                <span data-i18n="heroBadge">LOCATION SCOOTER AGADIR & TAGHAZOUT</span>
+            </div>
+            
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight mb-6">
+                <span data-i18n="heroTitle1">Louez Votre Scooter Avec</span> <br class="hidden sm:inline" />
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-brand-500 to-yellow-300" id="heroBrandName">BK MOTO</span>
+            </h1>
+            
+            <p class="max-w-2xl mx-auto text-slate-400 text-base sm:text-lg mb-10 leading-relaxed" data-i18n="heroSub">
+                Des scooters récents, fiables et parfaitement entretenus. Service rapide et livraison disponible partout à Agadir, Tamraght et Taghazout.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <button onclick="scrollToSection('fleet')" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-brand-500 to-amber-500 hover:from-brand-600 hover:to-amber-600 text-slate-950 font-extrabold text-base transition shadow-xl shadow-brand-500/25 flex items-center justify-center gap-3">
+                    <span data-i18n="heroCta1">Voir la Flotte & Tarifs</span>
+                    <i class="fa-solid fa-arrow-down"></i>
+                </button>
+                <button onclick="scrollToSection('contact')" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-base transition border border-slate-700 flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-headset text-brand-500"></i>
+                    <span data-i18n="heroCta2">Contactez-nous</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fleet Section -->
+    <section id="fleet" class="py-20 bg-slate-950 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4" data-i18n="fleetTitle">
+                    Notre Flotte de Scooters
+                </h2>
+                <p class="text-slate-400 max-w-xl mx-auto" data-i18n="fleetSubtitle">
+                    Choisissez votre modèle préféré au meilleur tarif garanti
+                </p>
+            </div>
+
+            <!-- Dynamic Scooter Cards Grid -->
+            <div id="scooterGrid" class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 max-w-5xl mx-auto">
+                <!-- JavaScript populates scooter cards here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="py-16 bg-slate-900/60 border-y border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800/80 flex items-start gap-4">
+                    <div class="p-3 bg-brand-500/10 text-brand-500 rounded-xl text-xl shrink-0">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-lg mb-1" data-i18n="feature1Title">Scooters Récents & Sécurisés</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed" data-i18n="feature1Desc">Chaque scooter est contrôlé et révisé avant chaque livraison pour votre sécurité.</p>
                     </div>
                 </div>
-                <!-- Background decoration graphic -->
-                <div class="absolute -right-12 -bottom-12 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
-            </div>
 
-            <!-- Search & Filters -->
-            <div id="scooter-grid" class="flex flex-col md:flex-row gap-4 items-center justify-between bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
-                <div class="relative w-full md:w-80">
-                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-                    <input type="text" id="search-input" oninput="renderFleet()" placeholder="Search by model or location..." class="w-full pl-10 pr-4 py-2 bg-slate-50 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all">
-                </div>
-                <div class="flex items-center gap-2 w-full md:w-auto overflow-x-auto pb-2 md:pb-0">
-                    <button onclick="setCategoryFilter('all')" class="cat-btn active px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap border transition-all bg-brand-600 text-white border-brand-600" data-cat="all" data-i18n="catAll">All Scooters</button>
-                    <button onclick="setCategoryFilter('Urban')" class="cat-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap border transition-all bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100" data-cat="Urban" data-i18n="catUrban">Urban Cruisers</button>
-                    <button onclick="setCategoryFilter('Sport')" class="cat-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap border transition-all bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100" data-cat="Sport" data-i18n="catSport">Sport / Pro</button>
-                    <button onclick="setCategoryFilter('Heavy Duty')" class="cat-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap border transition-all bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100" data-cat="Heavy Duty" data-i18n="catHeavy">Heavy Duty</button>
-                </div>
-            </div>
-
-            <!-- Scooter Display Grid -->
-            <div id="fleet-cards-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Dynamic Content Rendered Here -->
-            </div>
-        </section>
-
-        <!-- SECTION 2: FARE CALCULATOR & BOOKING -->
-        <section id="tab-calculator" class="hidden max-w-4xl mx-auto space-y-8">
-            <div class="text-center space-y-2">
-                <h2 class="text-3xl font-extrabold text-slate-900" data-i18n="calcTitle">Trip Fare Estimator</h2>
-                <p class="text-slate-500 text-sm" data-i18n="calcSub">Calculate your rental costs transparently before embarking on your ride.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xl">
-                <!-- Controls Form -->
-                <div class="md:col-span-7 space-y-6">
+                <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800/80 flex items-start gap-4">
+                    <div class="p-3 bg-brand-500/10 text-brand-500 rounded-xl text-xl shrink-0">
+                        <i class="fa-solid fa-truck-fast"></i>
+                    </div>
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2" data-i18n="lblSelectScooter">Select Vehicle Model</label>
-                        <select id="calc-scooter-select" onchange="calculateFare()" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 text-sm font-semibold focus:ring-2 focus:ring-brand-500 focus:outline-none">
-                            <!-- Populated dynamically -->
+                        <h3 class="font-bold text-white text-lg mb-1" data-i18n="feature2Title">Livraison Rapide</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed" data-i18n="feature2Desc">Livraison directement à votre hôtel, résidence ou à Agadir / Tamraght / Taghazout.</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800/80 flex items-start gap-4">
+                    <div class="p-3 bg-brand-500/10 text-brand-500 rounded-xl text-xl shrink-0">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-lg mb-1" data-i18n="feature3Title">Réservation Instantanée</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed" data-i18n="feature3Desc">Réservation en direct via WhatsApp sans carte bancaire requise.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-slate-950">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-br from-slate-900 to-slate-900/90 rounded-3xl p-8 sm:p-12 border border-slate-800 shadow-2xl">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-extrabold text-white mb-3" data-i18n="contactTitle">Contactez BK MOTO</h2>
+                    <p class="text-slate-400" data-i18n="contactSub">Nous sommes disponibles 7j/7 pour répondre à toutes vos questions</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                    <div class="p-4 bg-slate-950/80 rounded-2xl border border-slate-800 text-center">
+                        <i class="fa-solid fa-location-dot text-brand-500 text-2xl mb-3"></i>
+                        <h4 class="text-xs uppercase font-bold text-slate-400 mb-1" data-i18n="contactAddrLabel">LOCALISATION</h4>
+                        <p class="text-slate-200 text-sm font-medium" id="displayAddress">Hay Ait Soual, Tamraght Ouzdar, Aourir</p>
+                    </div>
+
+                    <div class="p-4 bg-slate-950/80 rounded-2xl border border-slate-800 text-center">
+                        <i class="fa-solid fa-phone text-brand-500 text-2xl mb-3"></i>
+                        <h4 class="text-xs uppercase font-bold text-slate-400 mb-1" data-i18n="contactPhoneLabel">TÉLÉPHONE / WHATSAPP</h4>
+                        <p class="text-slate-200 text-sm font-medium" id="displayPhone">+212671-688844 </p>
+                    </div>
+
+                    <div class="p-4 bg-slate-950/80 rounded-2xl border border-slate-800 text-center">
+                        <i class="fa-solid fa-clock text-brand-500 text-2xl mb-3"></i>
+                        <h4 class="text-xs uppercase font-bold text-slate-400 mb-1" data-i18n="contactHoursLabel">HORAIRES</h4>
+                        <p class="text-slate-200 text-sm font-medium" id="displayHours">08:00 - 22:00 (7j/7)</p>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <a id="directWhatsappBtn" href="https://wa.me/+212 671-688844" target="_blank" class="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-base transition shadow-lg shadow-emerald-600/25">
+                        <i class="fa-brands fa-whatsapp text-2xl"></i>
+                        <span data-i18n="contactBtn">Discuter sur WhatsApp</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-auto py-8 bg-slate-950 border-t border-slate-800/80 text-slate-500 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+                <p>&copy; <span id="footerYear">2026</span> <span id="footerBrandName">BK MOTO</span> Rental Agadir. Tous droits réservés.</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="text-slate-600">Tamraght • Aourir • Agadir • Taghazout</span>
+                
+                <!-- SECRET DISCREET ADMIN LOCK BUTTON -->
+                <button onclick="triggerAdminModal()" class="text-slate-700 hover:text-amber-500/80 transition p-1.5 rounded-md focus:outline-none" title="Admin Access">
+                    <i class="fa-solid fa-lock text-xs"></i>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-lg rounded-3xl p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeBookingModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white p-2">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <!-- STEP 1: FORM -->
+            <div id="bookingStep1">
+                <h3 class="text-2xl font-bold text-white mb-2" data-i18n="modalTitle">Réservation de Scooter</h3>
+                <p class="text-slate-400 text-sm mb-6" data-i18n="modalSub">Complétez les détails pour recevoir votre estimation instantanée</p>
+
+                <form onsubmit="handleBookingSubmit(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 uppercase mb-1" data-i18n="formScooter">Choix du Scooter</label>
+                        <select id="bookScooterSelect" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500" onchange="calculateBookingTotal()">
                         </select>
                     </div>
 
-                    <div>
-                        <div class="flex justify-between text-sm font-semibold mb-2">
-                            <span class="text-slate-700" data-i18n="lblDuration">Estimated Duration</span>
-                            <span class="text-brand-600 font-bold"><span id="calc-duration-val">2</span> <span data-i18n="hours">hours</span></span>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase mb-1" data-i18n="formName">Nom Complet</label>
+                            <input type="text" id="bookName" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500" placeholder="John Doe">
                         </div>
-                        <input type="range" id="calc-duration" min="0.5" max="24" step="0.5" value="2" oninput="calculateFare()" class="w-full accent-brand-600 cursor-pointer">
-                        <div class="flex justify-between text-[11px] text-slate-400 mt-1 font-medium">
-                            <span>30 mins</span>
-                            <span>12 hrs</span>
-                            <span>24 hrs</span>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase mb-1" data-i18n="formPhone">Téléphone / WhatsApp</label>
+                            <input type="tel" id="bookPhone" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500" placeholder="+212 600 000 000">
                         </div>
                     </div>
 
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2" data-i18n="lblPassType">Rental Package</label>
-                        <div class="grid grid-cols-3 gap-3">
-                            <label class="cursor-pointer">
-                                <input type="radio" name="pass-type" value="standard" checked onchange="calculateFare()" class="peer sr-only">
-                                <div class="p-3 text-center rounded-xl border border-slate-200 peer-checked:border-brand-500 peer-checked:bg-brand-50 transition-all">
-                                    <div class="text-xs font-bold text-slate-800" data-i18n="passStandard">Standard</div>
-                                    <div class="text-[10px] text-slate-500">Pay as you go</div>
-                                </div>
-                            </label>
-                            <label class="cursor-pointer">
-                                <input type="radio" name="pass-type" value="day" onchange="calculateFare()" class="peer sr-only">
-                                <div class="p-3 text-center rounded-xl border border-slate-200 peer-checked:border-brand-500 peer-checked:bg-brand-50 transition-all">
-                                    <div class="text-xs font-bold text-slate-800" data-i18n="passDay">Day Pass</div>
-                                    <div class="text-[10px] text-slate-500">20% Discount</div>
-                                </div>
-                            </label>
-                            <label class="cursor-pointer">
-                                <input type="radio" name="pass-type" value="commuter" onchange="calculateFare()" class="peer sr-only">
-                                <div class="p-3 text-center rounded-xl border border-slate-200 peer-checked:border-brand-500 peer-checked:bg-brand-50 transition-all">
-                                    <div class="text-xs font-bold text-slate-800" data-i18n="passCommuter">VIP Pass</div>
-                                    <div class="text-[10px] text-slate-500">30% Discount</div>
-                                </div>
-                            </label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase mb-1" data-i18n="formStartDate">Date Début</label>
+                            <input type="date" id="bookStartDate" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500" onchange="calculateBookingTotal()">
                         </div>
-                    </div>
-                </div>
-
-                <!-- Price Summary Card -->
-                <div class="md:col-span-5 bg-gradient-to-br from-slate-900 to-slate-800 text-white p-6 rounded-2xl flex flex-col justify-between relative overflow-hidden">
-                    <div class="space-y-4 relative z-10">
-                        <span class="text-xs font-bold uppercase tracking-widest text-brand-400" data-i18n="summaryTitle">Estimation Summary</span>
-                        <div class="border-b border-slate-700/60 pb-4">
-                            <div class="text-xs text-slate-400" data-i18n="selectedModel">Selected Scooter</div>
-                            <div class="text-lg font-bold text-white" id="summary-scooter-name">Pro Cruiser X</div>
-                        </div>
-                        <div class="space-y-2 text-xs text-slate-300">
-                            <div class="flex justify-between">
-                                <span data-i18n="baseUnlock">Unlock Fee:</span>
-                                <span class="font-bold text-white" id="summary-unlock">$1.00</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span data-i18n="hourlyRate">Hourly Rate:</span>
-                                <span class="font-bold text-white" id="summary-rate">$12.00/hr</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span data-i18n="appliedDiscount">Package Discount:</span>
-                                <span class="font-bold text-emerald-400" id="summary-discount">-$0.00</span>
-                            </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase mb-1" data-i18n="formEndDate">Date Fin</label>
+                            <input type="date" id="bookEndDate" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500" onchange="calculateBookingTotal()">
                         </div>
                     </div>
 
-                    <div class="pt-6 border-t border-slate-700/60 relative z-10">
-                        <div class="text-xs text-slate-400 mb-1" data-i18n="totalEstimate">Estimated Cost</div>
-                        <div class="text-4xl font-extrabold text-brand-400 mb-4" id="summary-total">$25.00</div>
-                        <button onclick="openBookingModal()" class="w-full py-3 bg-brand-500 hover:bg-brand-600 font-bold rounded-xl text-white text-sm shadow-lg shadow-brand-500/30 transition-all text-center">
-                            <span data-i18n="proceedBook">Confirm & Rent Now</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 3: ADMIN DASHBOARD -->
-        <section id="tab-admin" class="hidden space-y-8">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-200 pb-5">
-                <div>
-                    <h2 class="text-2xl font-extrabold text-slate-900" data-i18n="adminTitle">Fleet Management Panel</h2>
-                    <p class="text-xs text-slate-500" data-i18n="adminSub">Manage scooters, update availability statuses, and add new inventory.</p>
-                </div>
-                <button onclick="openAddScooterModal()" class="px-4 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-sm font-semibold shadow-md transition-all flex items-center gap-2">
-                    <i class="fa-solid fa-plus"></i> <span data-i18n="addNewScooter">Add New Scooter</span>
-                </button>
-            </div>
-
-            <!-- Fleet Inventory Table -->
-            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-sm">
-                        <thead class="bg-slate-50 text-xs text-slate-500 uppercase border-b border-slate-200 font-bold">
-                            <tr>
-                                <th class="px-6 py-4">Scooter</th>
-                                <th class="px-6 py-4">Category</th>
-                                <th class="px-6 py-4">Battery</th>
-                                <th class="px-6 py-4">Hourly Rate</th>
-                                <th class="px-6 py-4">Status</th>
-                                <th class="px-6 py-4 text-right">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="admin-scooter-table" class="divide-y divide-slate-100">
-                            <!-- Populated dynamically -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- MODAL 1: BOOKING MODAL -->
-    <div id="booking-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative transform transition-all">
-            <button onclick="closeBookingModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 p-2">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-            <div class="space-y-4">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center font-bold">
-                        <i class="fa-solid fa-key"></i>
-                    </div>
                     <div>
-                        <h3 class="text-lg font-bold text-slate-900" data-i18n="bookTitle">Reserve Your Scooter</h3>
-                        <p class="text-xs text-slate-500" data-i18n="bookSub">Instant digital key activation upon confirmation.</p>
+                        <label class="block text-xs font-semibold text-slate-300 uppercase mb-1" data-i18n="formDelivery">Lieu de Livraison</label>
+                        <input type="text" id="bookDelivery" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500" placeholder="Hôtel, Tamraght, Agadir, Taghazout...">
                     </div>
-                </div>
 
-                <form onsubmit="handleBookingSubmit(event)" class="space-y-4 pt-2">
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1" data-i18n="fullName">Full Name</label>
-                        <input type="text" required placeholder="John Doe" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <!-- Live Dynamic Estimation -->
+                    <div class="p-4 bg-slate-950 rounded-2xl border border-slate-800 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-slate-400 block" data-i18n="formTotalEst">Estimation Totale:</span>
+                            <span class="text-xs text-brand-500 font-semibold" id="daysCountText">1 jour(s)</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-2xl font-black text-amber-400" id="liveTotalPrice">200 DH</span>
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1" data-i18n="emailAddr">Email Address</label>
-                        <input type="email" required placeholder="john@example.com" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1" data-i18n="pickupLoc">Pickup Station</label>
-                        <input type="text" id="modal-pickup-location" readonly class="w-full p-3 bg-slate-100 text-slate-600 rounded-xl border border-slate-200 text-sm font-medium">
-                    </div>
-                    <button type="submit" class="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl text-sm shadow-lg shadow-brand-500/20 transition-all">
-                        <span data-i18n="confirmReserve">Confirm Reservation</span>
+
+                    <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-brand-500 to-amber-500 hover:from-brand-600 hover:to-amber-600 text-slate-950 font-extrabold text-base transition shadow-lg shadow-brand-500/20">
+                        <span data-i18n="formSubmit">Continuer vers le récapitulatif</span> <i class="fa-solid fa-arrow-right ml-2"></i>
                     </button>
                 </form>
+            </div>
+
+            <!-- STEP 2: SUMMARY & WHATSAPP REDIRECT -->
+            <div id="bookingStep2" class="hidden text-center">
+                <div class="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-3xl mx-auto mb-4">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+
+                <h3 class="text-2xl font-bold text-white mb-1" data-i18n="step2Title">Récapitulatif de Réservation</h3>
+                <p class="text-slate-400 text-sm mb-6" data-i18n="step2Sub">Cliquez ci-dessous pour confirmer directement sur WhatsApp</p>
+
+                <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 text-left space-y-3 mb-6 text-sm">
+                    <div class="flex justify-between border-b border-slate-800 pb-2">
+                        <span class="text-slate-400">Référence:</span>
+                        <span class="font-mono text-brand-500 font-bold" id="summaryRef">#BK-0000</span>
+                    </div>
+                    <div class="flex justify-between border-b border-slate-800 pb-2">
+                        <span class="text-slate-400">Scooter:</span>
+                        <span class="text-white font-semibold" id="summaryScooter">-</span>
+                    </div>
+                    <div class="flex justify-between border-b border-slate-800 pb-2">
+                        <span class="text-slate-400">Client:</span>
+                        <span class="text-white" id="summaryClient">-</span>
+                    </div>
+                    <div class="flex justify-between border-b border-slate-800 pb-2">
+                        <span class="text-slate-400">Période:</span>
+                        <span class="text-white" id="summaryDates">-</span>
+                    </div>
+                    <div class="flex justify-between pt-1">
+                        <span class="text-slate-400 font-bold">Prix Total:</span>
+                        <span class="text-amber-400 font-extrabold text-lg" id="summaryTotal">0 DH</span>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <a id="whatsappSendBtn" href="#" target="_blank" class="w-full py-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-base transition flex items-center justify-center gap-3 shadow-lg shadow-emerald-600/30">
+                        <i class="fa-brands fa-whatsapp text-2xl"></i>
+                        <span data-i18n="step2Send">Envoyer la Réservation sur WhatsApp</span>
+                    </a>
+                    <button onclick="backToStep1()" class="w-full py-2.5 text-xs text-slate-400 hover:text-white">
+                        <i class="fa-solid fa-arrow-left mr-1"></i> Modifier mes informations
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- MODAL 2: ADD NEW SCOOTER (ADMIN) -->
-    <div id="add-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative">
-            <button onclick="closeAddScooterModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 p-2">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-            
-            <h3 class="text-xl font-bold text-slate-900 mb-4" data-i18n="addScooterTitle">Add Vehicle to Fleet</h3>
+    <!-- ADMIN AUTH PIN MODAL -->
+    <div id="adminAuthModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-sm rounded-3xl p-6 shadow-2xl text-center">
+            <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mx-auto mb-4">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Accès Administration</h3>
+            <p class="text-slate-400 text-xs mb-6">Veuillez entrer le code PIN pour accéder au panneau de contrôle</p>
 
-            <form onsubmit="addNewScooterAdmin(event)" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-1">Scooter Model Name</label>
-                    <input type="text" id="new-scooter-name" required placeholder="e.g. Segway Ninebot Max" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
+            <form onsubmit="verifyAdminPin(event)">
+                <input type="password" id="adminPinInput" maxlength="10" placeholder="PIN Code (défaut: 1234)" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-center font-mono text-xl tracking-widest text-white mb-4 focus:outline-none focus:border-brand-500">
+                <div class="flex gap-3">
+                    <button type="button" onclick="closeAdminAuthModal()" class="w-1/2 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300">Annuler</button>
+                    <button type="submit" class="w-1/2 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-xs font-bold text-slate-950">Valider</button>
                 </div>
-
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1">Category</label>
-                        <select id="new-scooter-cat" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
-                            <option value="Urban">Urban</option>
-                            <option value="Sport">Sport</option>
-                            <option value="Heavy Duty">Heavy Duty</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1">Hourly Rate ($)</label>
-                        <input type="number" step="0.5" id="new-scooter-price" required placeholder="12.00" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1">Top Speed (km/h)</label>
-                        <input type="number" id="new-scooter-speed" required placeholder="25" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1">Range (km)</label>
-                        <input type="number" id="new-scooter-range" required placeholder="40" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-1">Location Station</label>
-                    <input type="text" id="new-scooter-loc" required placeholder="Downtown Station" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
-                </div>
-
-                <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-1">Image URL</label>
-                    <input type="text" id="new-scooter-img" placeholder="https://i.ibb.co/HTcWQ6kQ/IMG-1011.jpg" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
-                </div>
-
-                <button type="submit" class="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl text-sm shadow-lg shadow-brand-500/20 transition-all">
-                    Save and Register Scooter
-                </button>
             </form>
         </div>
     </div>
 
+    <!-- ADMIN DASHBOARD MODAL -->
+    <div id="adminDashboardModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-4xl rounded-3xl p-6 sm:p-8 shadow-2xl max-h-[90vh] overflow-y-auto">
+            
+            <div class="flex items-center justify-between pb-6 border-b border-slate-800 mb-6">
+                <div>
+                    <h3 class="text-2xl font-bold text-white">Tableau de Bord Admin</h3>
+                    <p class="text-slate-400 text-xs">Gérez vos véhicules, photos, tarifs et coordonnées</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="closeAdminDashboardModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300">
+                        <i class="fa-solid fa-lock mr-1.5"></i> Verrouiller
+                    </button>
+                    <button onclick="closeAdminDashboardModal()" class="text-slate-400 hover:text-white p-2">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tab Buttons -->
+            <div class="flex gap-2 mb-6 border-b border-slate-800 pb-3">
+                <button onclick="switchAdminTab('fleetTab')" id="btnFleetTab" class="px-4 py-2 rounded-xl bg-brand-500 text-slate-950 font-bold text-xs">Gestion Flotte</button>
+                <button onclick="switchAdminTab('settingsTab')" id="btnSettingsTab" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs hover:bg-slate-700">Paramètres Généraux</button>
+            </div>
+
+            <!-- TAB 1: FLEET MANAGEMENT -->
+            <div id="adminTabFleet" class="space-y-6">
+                <div class="flex justify-between items-center">
+                    <h4 class="font-bold text-white text-base">Liste des Scooters</h4>
+                    <button onclick="addNewScooterAdmin()" class="px-3 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-2">
+                        <i class="fa-solid fa-plus"></i> Ajouter Un Scooter
+                    </button>
+                </div>
+
+                <div id="adminScooterList" class="space-y-4">
+                    <!-- Dynamic admin scooter rows -->
+                </div>
+            </div>
+
+            <!-- TAB 2: GENERAL SETTINGS -->
+            <div id="adminTabSettings" class="hidden space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Nom de l'Entreprise</label>
+                    <input type="text" id="adminSettingBrand" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Numéro WhatsApp</label>
+                    <input type="text" id="adminSettingPhone" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Adresse Officielle</label>
+                    <input type="text" id="adminSettingAddress" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 uppercase mb-1">Code PIN Admin</label>
+                    <input type="text" id="adminSettingPin" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500">
+                </div>
+
+                <div class="pt-4">
+                    <button onclick="saveAdminSettings()" class="px-6 py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-slate-950 font-bold text-xs">
+                        Enregistrer les Paramètres
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <!-- Notification Toast -->
-    <div id="toast" class="fixed bottom-5 right-5 z-50 bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none">
-        <i class="fa-solid fa-circle-check text-brand-500 text-lg"></i>
-        <span id="toast-message" class="text-sm font-medium">Operation completed successfully!</span>
+    <div id="toastNotification" class="fixed bottom-6 right-6 z-50 hidden transition-all duration-300">
+        <div class="bg-slate-900 border border-amber-500/50 px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 text-white text-sm">
+            <i class="fa-solid fa-circle-info text-amber-400"></i>
+            <span id="toastMessage">Action effectuée</span>
+        </div>
     </div>
 
     <script>
-        // Clean default image URL used throughout application
-        const DEFAULT_SCOOTER_IMG = "https://i.ibb.co/HTcWQ6kQ/IMG-1011.jpg";
+        // Master Application State with Default Values Hardcoded
+        const DEFAULT_DATA = {
+            companyName: "BK MOTO",
+            phone: "+212 671-688844",
+            address: "Hay Ait Soual, Tamraght Ouzdar, Aourir",
+            hours: "08:00 - 22:00 (7j/7)",
+            adminPin: "1234",
+            scooters: [
+                {
+                    id: "scooter_1",
+                    name: "Cappuccino Teamo",
+                    year: "2026",
+                    image: "https://i.ibb.co/HTcWQ6kQ/IMG-1011.jpg"
+                    description: "Scooter élégant et moderne, très maniable et économique. Parfait pour les déplacements à Agadir et Tamraght.",
+                    price1d: 200,
+                    price2_3d: 200,
+                    price4d: 170
+                },
+                {
+                    id: "scooter_2",
+                    name: "Austin Rebecca S",
+                    year: "2026",
+                    image: "https://i.ibb.co/HTcWQ6kQ/IMG-1011.jpg" 
+                    description: "Scooter robuste et confortable à deux, idéal pour visiter Taghazout, Aourir et la région.",
+                    price1d: 200,
+                    price2_3d: 200,
+                    price4d: 170
+                }
+            ]
+        };
 
-        // Initialized Clean Scooter Data Structure
-        const DEFAULT_DATA = [
-            {
-                id: 1,
-                name: "City Hopper Pro",
-                category: "Urban",
-                hourlyRate: 8.50,
-                speed: 25,
-                range: 35,
-                battery: 92,
-                status: "Available",
-                location: "Central Station Hub",
-                image: "https://i.ibb.co/HTcWQ6kQ/IMG-1011.jpg"
+        // Multi-language Translations
+        const I18N = {
+            FR: {
+                navFlotte: "Nos Scooters",
+                navContact: "Contact",
+                navBook: "Réserver",
+                heroBadge: "LOCATION SCOOTER AGADIR & TAGHAZOUT",
+                heroTitle1: "Louez Votre Scooter Avec",
+                heroSub: "Des scooters récents, fiables et parfaitement entretenus. Service rapide et livraison disponible partout à Agadir, Tamraght et Taghazout.",
+                heroCta1: "Voir la Flotte & Tarifs",
+                heroCta2: "Contactez-nous",
+                fleetTitle: "Notre Flotte de Scooters",
+                fleetSubtitle: "Choisissez votre modèle préféré au meilleur tarif garanti",
+                feature1Title: "Scooters Récents & Sécurisés",
+                feature1Desc: "Chaque scooter est contrôlé et révisé avant chaque livraison pour votre sécurité.",
+                feature2Title: "Livraison Rapide",
+                feature2Desc: "Livraison directement à votre hôtel, résidence ou à Agadir / Tamraght / Taghazout.",
+                feature3Title: "Réservation Instantanée",
+                feature3Desc: "Réservation en direct via WhatsApp sans carte bancaire requise.",
+                contactTitle: "Contactez BK MOTO",
+                contactSub: "Nous sommes disponibles 7j/7 pour répondre à toutes vos questions",
+                contactAddrLabel: "LOCALISATION",
+                contactPhoneLabel: "TÉLÉPHONE / WHATSAPP",
+                contactHoursLabel: "HORAIRES",
+                contactBtn: "Discuter sur WhatsApp",
+                modalTitle: "Réservation de Scooter",
+                modalSub: "Complétez les détails pour recevoir votre estimation instantanée",
+                formScooter: "Choix du Scooter",
+                formName: "Nom Complet",
+                formPhone: "Téléphone / WhatsApp",
+                formStartDate: "Date Début",
+                formEndDate: "Date Fin",
+                formDelivery: "Lieu de Livraison",
+                formTotalEst: "Estimation Totale:",
+                formSubmit: "Continuer vers le récapitulatif",
+                step2Title: "Récapitulatif de Réservation",
+                step2Sub: "Cliquez ci-dessous pour confirmer directement sur WhatsApp",
+                step2Send: "Envoyer la Réservation sur WhatsApp",
+                bookBtnCard: "Réserver Maintenant"
             },
-            {
-                id: 2,
-                name: "Thunder Bolt X2",
-                category: "Sport",
-                hourlyRate: 14.00,
-                speed: 45,
-                range: 60,
-                battery: 100,
-                status: "Available",
-                location: "North Campus Metro",
-                image: "https://i.ibb.co/HTcWQ6kQ/IMG-1011.jpg"
-            },
-            {
-                id: 3,
-                name: "Cruiser Max 300",
-                category: "Heavy Duty",
-                hourlyRate: 11.00,
-                speed: 30,
-                range: 50,
-                battery: 78,
-                status: "In Use",
-                location: "Tech District Dock",
-                image: "https://i.ibb.co/HTcWQ6kQ/IMG-1011.jpg"
-            },
-            {
-                id: 4,
-                name: "Eco Glide Essential",
-                category: "Urban",
-                hourlyRate: 6.00,
-                speed: 20,
-                range: 25,
-                battery: 45,
-                status: "Maintenance",
-                location: "East Side Service Depot",
-                image: "https://i.ibb.co/HTcWQ6kQ/IMG-1011.jpg"
-            }
-        ];
-
-        // State Storage initialization
-        let fleetData = JSON.parse(localStorage.getItem("scooters_fleet")) || DEFAULT_DATA;
-        let activeCategory = "all";
-        let currentLang = "en";
-
-        // Multilingual Dictionary
-        const translations = {
-            en: {
-                tagline: "Urban Mobility",
-                navFleet: "Explore Fleet",
-                navCalc: "Fare Estimator",
-                navAdmin: "Fleet Management",
-                quickRide: "Quick Book",
-                heroTitle: "Ride Through Your City Effortlessly & Green",
-                heroSub: "Unlock high-performance electric scooters around you. Flexible hourly rates, instant unlocks, and premium battery life.",
-                viewFleetBtn: "Browse Available Scooters",
-                catAll: "All Scooters",
-                catUrban: "Urban Cruisers",
-                catSport: "Sport / Pro",
-                catHeavy: "Heavy Duty",
-                calcTitle: "Trip Fare Estimator",
-                calcSub: "Calculate your rental costs transparently before embarking on your ride.",
-                lblSelectScooter: "Select Vehicle Model",
-                lblDuration: "Estimated Duration",
-                hours: "hours",
-                lblPassType: "Rental Package",
-                passStandard: "Standard",
-                passDay: "Day Pass",
-                passCommuter: "VIP Pass",
-                summaryTitle: "Estimation Summary",
-                selectedModel: "Selected Scooter",
-                baseUnlock: "Unlock Fee:",
-                hourlyRate: "Hourly Rate:",
-                appliedDiscount: "Package Discount:",
-                totalEstimate: "Estimated Cost",
-                proceedBook: "Confirm & Rent Now",
-                adminTitle: "Fleet Management Panel",
-                adminSub: "Manage scooters, update availability statuses, and add new inventory.",
-                addNewScooter: "Add New Scooter",
-                bookTitle: "Reserve Your Scooter",
-                bookSub: "Instant digital key activation upon confirmation.",
-                fullName: "Full Name",
-                emailAddr: "Email Address",
-                pickupLoc: "Pickup Station",
-                confirmReserve: "Confirm Reservation",
-                addScooterTitle: "Add Vehicle to Fleet"
-            },
-            es: {
-                tagline: "Movilidad Urbana",
-                navFleet: "Explorar Flota",
-                navCalc: "Calculadora de Tarifas",
-                navAdmin: "Gestión de Flota",
-                quickRide: "Reserva Rápida",
-                heroTitle: "Rueda por tu Ciudad de Forma Ecológica",
-                heroSub: "Desbloquea patinetes eléctricos de alto rendimiento. Tarifas por hora flexibles y excelente autonomía.",
-                viewFleetBtn: "Ver Patinetes Disponibles",
-                catAll: "Todos",
-                catUrban: "Urbanos",
-                catSport: "Deportivos",
-                catHeavy: "Carga Pesada",
-                calcTitle: "Estimador de Tarifas",
-                calcSub: "Calcula tus costos de alquiler de forma transparente antes de viajar.",
-                lblSelectScooter: "Selecciona el Modelo",
-                lblDuration: "Duración Estimada",
-                hours: "horas",
-                lblPassType: "Paquete de Alquiler",
-                passStandard: "Estándar",
-                passDay: "Pase Diario",
-                passCommuter: "Pase VIP",
-                summaryTitle: "Resumen de Estimación",
-                selectedModel: "Patinete Seleccionado",
-                baseUnlock: "Tarifa Desbloqueo:",
-                hourlyRate: "Tarifa por Hora:",
-                appliedDiscount: "Descuento Aplicado:",
-                totalEstimate: "Costo Estimado",
-                proceedBook: "Confirmar y Reservar",
-                adminTitle: "Panel de Gestión de Flota",
-                adminSub: "Administra patinetes, cambia sus estados y añade nuevo inventario.",
-                addNewScooter: "Añadir Nuevo Patinete",
-                bookTitle: "Reserva tu Patinete",
-                bookSub: "Activación de llave digital instantánea.",
-                fullName: "Nombre Completo",
-                emailAddr: "Correo Electrónico",
-                pickupLoc: "Estación de Recogida",
-                confirmReserve: "Confirmar Reserva",
-                addScooterTitle: "Añadir Vehículo a la Flota"
-            },
-            fr: {
-                tagline: "Mobilité Urbaine",
-                navFleet: "Explorer la Flotte",
-                navCalc: "Calculateur de Tarif",
-                navAdmin: "Gestion de Flotte",
-                quickRide: "Réservation Rapide",
-                heroTitle: "Parcourez la Ville sans Émissions",
-                heroSub: "Débloquez des trottinettes électriques haute performance. Tarifs horaires flexibles et autonomie maximale.",
-                viewFleetBtn: "Voir la Flotte",
-                catAll: "Toutes",
-                catUrban: "Urbaines",
-                catSport: "Sport",
-                catHeavy: "Robustes",
-                calcTitle: "Estimateur de Trajet",
-                calcSub: "Calculez vos coûts de location en toute transparence.",
-                lblSelectScooter: "Sélectionner un Modèle",
-                lblDuration: "Durée Estimée",
-                hours: "heures",
-                lblPassType: "Forfait de Location",
-                passStandard: "Standard",
-                passDay: "Pass Journée",
-                passCommuter: "Pass VIP",
-                summaryTitle: "Résumé de l'Estimation",
-                selectedModel: "Trottinette Sélectionnée",
-                baseUnlock: "Frais de Déverrouillage:",
-                hourlyRate: "Tarif Horaire:",
-                appliedDiscount: "Remise Appliquée:",
-                totalEstimate: "Coût Estimé",
-                proceedBook: "Confirmer et Louer",
-                adminTitle: "Panneau de Gestion",
-                adminSub: "Gérez les trottinettes, mettez à jour les statuts et ajoutez des véhicules.",
-                addNewScooter: "Ajouter une Trottinette",
-                bookTitle: "Réservez votre Trottinette",
-                bookSub: "Clé numérique activée dès la confirmation.",
-                fullName: "Nom Complet",
-                emailAddr: "Adresse E-mail",
-                pickupLoc: "Station de Départ",
-                confirmReserve: "Confirmer la Réservation",
-                addScooterTitle: "Ajouter un Véhicule"
+            EN: {
+                navFlotte: "Our Scooters",
+                navContact: "Contact Us",
+                navBook: "Book Now",
+                heroBadge: "SCOOTER RENTAL AGADIR & TAGHAZOUT",
+                heroTitle1: "Rent Your Scooter With",
+                heroSub: "Recent, reliable, and perfectly maintained scooters. Fast delivery anywhere in Agadir, Tamraght, and Taghazout.",
+                heroCta1: "View Fleet & Rates",
+                heroCta2: "Contact Us",
+                fleetTitle: "Our Scooter Fleet",
+                fleetSubtitle: "Choose your favorite model at the best guaranteed rate",
+                feature1Title: "Recent & Safe Scooters",
+                feature1Desc: "Every scooter is inspected and serviced before each delivery for your safety.",
+                feature2Title: "Fast Delivery",
+                feature2Desc: "Direct delivery to your hotel, residence, or in Agadir / Tamraght / Taghazout.",
+                feature3Title: "Instant Booking",
+                feature3Desc: "Direct booking via WhatsApp with no credit card required.",
+                contactTitle: "Contact BK MOTO",
+                contactSub: "We are available 7 days a week to answer all your questions",
+                contactAddrLabel: "LOCATION",
+                contactPhoneLabel: "PHONE / WHATSAPP",
+                contactHoursLabel: "HOURS",
+                contactBtn: "Chat on WhatsApp",
+                modalTitle: "Scooter Booking",
+                modalSub: "Complete the details to receive your instant estimate",
+                formScooter: "Select Scooter",
+                formName: "Full Name",
+                formPhone: "Phone / WhatsApp",
+                formStartDate: "Start Date",
+                formEndDate: "End Date",
+                formDelivery: "Delivery Location",
+                formTotalEst: "Total Estimate:",
+                formSubmit: "Continue to Summary",
+                step2Title: "Booking Summary",
+                step2Sub: "Click below to confirm directly on WhatsApp",
+                step2Send: "Send Booking on WhatsApp",
+                bookBtnCard: "Book Now"
             }
         };
 
-        window.addEventListener("DOMContentLoaded", () => {
-            renderFleet();
-            populateCalculatorOptions();
-            renderAdminTable();
-            calculateFare();
-        });
+        let appData = null;
+        let currentLang = 'FR';
+        let bookingRefCurrent = '';
 
-        // Tab Navigation Mechanism
-        function switchTab(tabName) {
-            ['fleet', 'calculator', 'admin'].forEach(tab => {
-                const section = document.getElementById(`tab-${tab}`);
-                const navBtn = document.getElementById(`nav-${tab}`);
-                
-                if (tab === tabName) {
-                    section.classList.remove('hidden');
-                    if(navBtn) {
-                        navBtn.classList.add('text-brand-600', 'bg-brand-50');
-                        navBtn.classList.remove('text-slate-600');
-                    }
+        function loadAppData() {
+            try {
+                const saved = localStorage.getItem('bk_moto_master_data');
+                if (saved) {
+                    appData = JSON.parse(saved);
                 } else {
-                    section.classList.add('hidden');
-                    if(navBtn) {
-                        navBtn.classList.remove('text-brand-600', 'bg-brand-50');
-                        navBtn.classList.add('text-slate-600');
-                    }
+                    appData = JSON.parse(JSON.stringify(DEFAULT_DATA));
                 }
-            });
-        }
-
-        function toggleMobileMenu() {
-            document.getElementById("mobile-menu").classList.toggle("hidden");
-        }
-
-        // Language Switcher Logic
-        function toggleLangDropdown() {
-            document.getElementById("lang-dropdown").classList.toggle("hidden");
-        }
-
-        function setLanguage(lang) {
-            currentLang = lang;
-            document.getElementById("current-lang-label").innerText = lang.toUpperCase();
-            document.getElementById("lang-dropdown").classList.add("hidden");
-
-            // Update DOM text
-            document.querySelectorAll("[data-i18n]").forEach(el => {
-                const key = el.getAttribute("data-i18n");
-                if (translations[lang] && translations[lang][key]) {
-                    el.innerText = translations[lang][key];
-                }
-            });
-
-            calculateFare(); // re-render text inside estimator
-        }
-
-        // Filter Category Handler
-        function setCategoryFilter(cat) {
-            activeCategory = cat;
-            document.querySelectorAll(".cat-btn").forEach(btn => {
-                if(btn.dataset.cat === cat) {
-                    btn.classList.add("bg-brand-600", "text-white", "border-brand-600");
-                    btn.classList.remove("bg-slate-50", "text-slate-600", "border-slate-200");
-                } else {
-                    btn.classList.remove("bg-brand-600", "text-white", "border-brand-600");
-                    btn.classList.add("bg-slate-50", "text-slate-600", "border-slate-200");
-                }
-            });
-            renderFleet();
-        }
-
-        function renderFleet() {
-            const grid = document.getElementById("fleet-cards-container");
-            const searchVal = document.getElementById("search-input").value.toLowerCase();
-
-            grid.innerHTML = "";
-
-            const filtered = fleetData.filter(item => {
-                const matchesCat = activeCategory === "all" || item.category === activeCategory;
-                const matchesSearch = item.name.toLowerCase().includes(searchVal) || item.location.toLowerCase().includes(searchVal);
-                return matchesCat && matchesSearch;
-            });
-
-            if(filtered.length === 0) {
-                grid.innerHTML = `
-                    <div class="col-span-full py-12 text-center text-slate-400">
-                        <i class="fa-solid fa-motorcycle text-4xl mb-3"></i>
-                        <p class="text-sm font-medium">No scooters matching your criteria were found.</p>
-                    </div>
-                `;
-                return;
+            } catch (e) {
+                appData = JSON.parse(JSON.stringify(DEFAULT_DATA));
             }
+        }
 
-            filtered.forEach(scooter => {
-                const isAvailable = scooter.status === "Available";
-                
-                const cardHtml = `
-                    <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between group">
+        function saveAppData() {
+            try {
+                localStorage.setItem('bk_moto_master_data', JSON.stringify(appData));
+                sessionStorage.setItem('bk_moto_master_data', JSON.stringify(appData));
+            } catch (e) {
+                console.warn("Storage exception:", e);
+            }
+            renderUI();
+        }
+
+        function renderUI() {
+            if (!appData) return;
+
+            document.getElementById('navBrandName').textContent = appData.companyName || "BK MOTO";
+            document.getElementById('heroBrandName').textContent = appData.companyName || "BK MOTO";
+            document.getElementById('footerBrandName').textContent = appData.companyName || "BK MOTO";
+            document.getElementById('displayAddress').textContent = appData.address || "Hay Ait Soual, Tamraght Ouzdar, Aourir";
+            document.getElementById('displayPhone').textContent = appData.phone || "+212 671-688844";
+            document.getElementById('displayHours').textContent = appData.hours || "08:00 - 22:00 (7j/7)";
+            document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+            const waNum = (appData.phone || "").replace(/[^0-9]/g, "");
+            document.getElementById('directWhatsappBtn').href = `https://wa.me/${waNum}?text=Bonjour%20BK%20MOTO,%20je%20souhaite%20des%20informations%20pour%20louer%20un%20scooter.`;
+
+            // Render Scooter Fleet Grid
+            const grid = document.getElementById('scooterGrid');
+            grid.innerHTML = '';
+
+            const bookSelect = document.getElementById('bookScooterSelect');
+            bookSelect.innerHTML = '';
+
+            appData.scooters.forEach((scooter) => {
+                const opt = document.createElement('option');
+                opt.value = scooter.id;
+                opt.textContent = `${scooter.name} (${scooter.price1d} DH/j)`;
+                bookSelect.appendChild(opt);
+
+                const card = document.createElement('div');
+                card.className = "bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-xl transition transform hover:-translate-y-1 hover:border-slate-700 flex flex-col";
+                card.innerHTML = `
+                    <div class="relative h-60 bg-slate-950 overflow-hidden">
+                        <img src="${scooter.image}" alt="${scooter.name}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x600/1e293b/f59e0b?text=${encodeURIComponent(scooter.name)}'">
+                        <div class="absolute top-4 right-4 bg-slate-950/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-amber-400 border border-slate-800">
+                            ${scooter.year}
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
                         <div>
-                            <!-- Clean Image Render -->
-                            <div class="relative h-48 bg-slate-100 overflow-hidden">
-                                <img src="${scooter.image}" 
-                                     alt="${scooter.name}" 
-                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                     onerror="this.src='${DEFAULT_SCOOTER_IMG}'">
-                                <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase backdrop-blur-md ${getStatusBadgeClass(scooter.status)}">
-                                    ${scooter.status}
-                                </span>
-                                <span class="absolute top-3 right-3 bg-slate-900/70 backdrop-blur-md text-white text-xs font-semibold px-2.5 py-1 rounded-lg">
-                                    <i class="fa-solid fa-battery-three-quarters text-emerald-400 mr-1"></i>${scooter.battery}%
-                                </span>
-                            </div>
-
-                            <div class="p-5 space-y-4">
-                                <div class="flex justify-between items-start">
-                                    <div>
-                                        <span class="text-[10px] font-bold uppercase tracking-wider text-brand-600 bg-brand-50 px-2 py-0.5 rounded-md">${scooter.category}</span>
-                                        <h3 class="text-lg font-bold text-slate-900 mt-1">${scooter.name}</h3>
-                                    </div>
-                                    <div class="text-right">
-                                        <span class="text-xl font-extrabold text-slate-900">$${scooter.hourlyRate.toFixed(2)}</span>
-                                        <span class="text-xs text-slate-400 font-medium block">/hour</span>
-                                    </div>
+                            <h3 class="text-2xl font-extrabold text-white mb-2">${scooter.name}</h3>
+                            <p class="text-slate-400 text-sm mb-6 leading-relaxed">${scooter.description}</p>
+                            
+                            <div class="grid grid-cols-3 gap-2 bg-slate-950 p-3 rounded-2xl border border-slate-800/80 mb-6 text-center">
+                                <div class="p-1">
+                                    <span class="text-[10px] text-slate-500 font-semibold uppercase block">1 day</span>
+                                    <span class="text-sm font-extrabold text-amber-400">${scooter.price1d} DH</span>
                                 </div>
-
-                                <div class="grid grid-cols-2 gap-2 text-xs py-2 bg-slate-50 rounded-xl p-3 border border-slate-100">
-                                    <div class="flex items-center gap-2 text-slate-600">
-                                        <i class="fa-solid fa-gauge text-slate-400"></i>
-                                        <span><b>${scooter.speed}</b> km/h Top</span>
-                                    </div>
-                                    <div class="flex items-center gap-2 text-slate-600">
-                                        <i class="fa-solid fa-route text-slate-400"></i>
-                                        <span><b>${scooter.range}</b> km Range</span>
-                                    </div>
+                                <div class="p-1 border-x border-slate-800">
+                                    <span class="text-[10px] text-slate-500 font-semibold uppercase block">2-3 days</span>
+                                    <span class="text-sm font-extrabold text-amber-400">${scooter.price2_3d} DH</span>
                                 </div>
-
-                                <div class="flex items-center gap-1.5 text-xs text-slate-500">
-                                    <i class="fa-solid fa-location-dot text-slate-400"></i>
-                                    <span class="truncate">${scooter.location}</span>
+                                <div class="p-1">
+                                    <span class="text-[10px] text-slate-500 font-semibold uppercase block">4+ days</span>
+                                    <span class="text-sm font-extrabold text-amber-400">${scooter.price4d} DH</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="p-5 pt-0">
-                            <button onclick="bookScooterDirect(${scooter.id})" ${!isAvailable ? 'disabled' : ''} class="w-full py-3 rounded-xl text-sm font-bold transition-all flex items-center justify-center gap-2 ${isAvailable ? 'bg-slate-900 hover:bg-brand-600 text-white shadow-md' : 'bg-slate-100 text-slate-400 cursor-not-allowed'}">
-                                <span>${isAvailable ? 'Book This Ride' : 'Currently Unavailable'}</span>
-                                ${isAvailable ? '<i class="fa-solid fa-arrow-right text-xs"></i>' : ''}
-                            </button>
-                        </div>
-                    </div>
-                `;
-                grid.innerHTML += cardHtml;
-            });
-        }
-
-        function getStatusBadgeClass(status) {
-            switch(status) {
-                case "Available": return "bg-emerald-500/80 text-white";
-                case "In Use": return "bg-amber-500/80 text-white";
-                default: return "bg-rose-500/80 text-white";
-            }
-        }
-
-        function populateCalculatorOptions() {
-            const select = document.getElementById("calc-scooter-select");
-            select.innerHTML = "";
-            fleetData.forEach(item => {
-                const opt = document.createElement("option");
-                opt.value = item.id;
-                opt.textContent = `${item.name} ($${item.hourlyRate.toFixed(2)}/hr)`;
-                select.appendChild(opt);
-            });
-        }
-
-        function calculateFare() {
-            const scooterId = parseInt(document.getElementById("calc-scooter-select").value) || (fleetData[0] ? fleetData[0].id : null);
-            const duration = parseFloat(document.getElementById("calc-duration").value);
-            document.getElementById("calc-duration-val").innerText = duration;
-
-            if(!scooterId) return;
-
-            const scooter = fleetData.find(s => s.id === scooterId) || fleetData[0];
-            const passType = document.querySelector('input[name="pass-type"]:checked').value;
-
-            const unlockFee = 1.00;
-            let subtotal = unlockFee + (scooter.hourlyRate * duration);
-            let discount = 0;
-
-            if (passType === "day") {
-                discount = subtotal * 0.20;
-            } else if (passType === "commuter") {
-                discount = subtotal * 0.30;
-            }
-
-            const total = subtotal - discount;
-
-            document.getElementById("summary-scooter-name").innerText = scooter.name;
-            document.getElementById("summary-unlock").innerText = `$${unlockFee.toFixed(2)}`;
-            document.getElementById("summary-rate").innerText = `$${scooter.hourlyRate.toFixed(2)}/hr`;
-            document.getElementById("summary-discount").innerText = `-$${discount.toFixed(2)}`;
-            document.getElementById("summary-total").innerText = `$${total.toFixed(2)}`;
-        }
-
-        function renderAdminTable() {
-            const tbody = document.getElementById("admin-scooter-table");
-            tbody.innerHTML = "";
-
-            fleetData.forEach(scooter => {
-                const tr = document.createElement("tr");
-                tr.className = "hover:bg-slate-50 transition-colors";
-                tr.innerHTML = `
-                    <td class="px-6 py-4 flex items-center gap-3">
-                        <img src="${scooter.image}" class="w-10 h-10 rounded-lg object-cover border border-slate-200" onerror="this.src='${DEFAULT_SCOOTER_IMG}'">
-                        <div>
-                            <div class="font-bold text-slate-900">${scooter.name}</div>
-                            <div class="text-xs text-slate-400">${scooter.location}</div>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 font-semibold text-xs text-slate-600">${scooter.category}</td>
-                    <td class="px-6 py-4 font-semibold text-xs text-slate-700">${scooter.battery}%</td>
-                    <td class="px-6 py-4 font-bold text-slate-900">$${scooter.hourlyRate.toFixed(2)}</td>
-                    <td class="px-6 py-4">
-                        <select onchange="updateScooterStatus(${scooter.id}, this.value)" class="text-xs font-semibold px-2.5 py-1.5 rounded-lg border border-slate-200 bg-white">
-                            <option value="Available" ${scooter.status === "Available" ? "selected" : ""}>Available</option>
-                            <option value="In Use" ${scooter.status === "In Use" ? "selected" : ""}>In Use</option>
-                            <option value="Maintenance" ${scooter.status === "Maintenance" ? "selected" : ""}>Maintenance</option>
-                        </select>
-                    </td>
-                    <td class="px-6 py-4 text-right">
-                        <button onclick="deleteScooter(${scooter.id})" class="p-2 text-rose-500 hover:bg-rose-50 rounded-lg transition-colors">
-                            <i class="fa-solid fa-trash-can"></i>
+                        <button onclick="openBookingModal('${scooter.id}')" class="w-full py-3.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-sm transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-key"></i>
+                            <span data-i18n="bookBtnCard">${I18N[currentLang].bookBtnCard}</span>
                         </button>
-                    </td>
+                    </div>
                 `;
-                tbody.appendChild(tr);
+                grid.appendChild(card);
+            });
+
+            applyTranslations();
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'FR' ? 'EN' : 'FR';
+            document.getElementById('currentLangText').textContent = currentLang === 'FR' ? 'FR 🇫🇷' : 'EN 🇬🇧';
+            applyTranslations();
+        }
+
+        function applyTranslations() {
+            const dict = I18N[currentLang];
+            document.querySelectorAll('[data-i18n]').forEach(elem => {
+                const key = elem.getAttribute('data-i18n');
+                if (dict[key]) {
+                    elem.textContent = dict[key];
+                }
             });
         }
 
-        function updateScooterStatus(id, newStatus) {
-            const scooter = fleetData.find(s => s.id === id);
-            if(scooter) {
-                scooter.status = newStatus;
-                saveAndRefresh();
-                showToast(`Updated status of ${scooter.name} to ${newStatus}`);
+        function scrollToSection(id) {
+            const sec = document.getElementById(id);
+            if (sec) {
+                sec.scrollIntoView({ behavior: 'smooth' });
             }
         }
 
-        function deleteScooter(id) {
-            fleetData = fleetData.filter(s => s.id !== id);
-            saveAndRefresh();
-            showToast("Vehicle removed from fleet database.");
-        }
+        function openBookingModal(scooterId = null) {
+            document.getElementById('bookingStep1').classList.remove('hidden');
+            document.getElementById('bookingStep2').classList.add('hidden');
 
-        // Clean direct implementation for adding scooter with sanitized URLs
-        function addNewScooterAdmin(e) {
-            e.preventDefault();
-
-            const name = document.getElementById("new-scooter-name").value;
-            const category = document.getElementById("new-scooter-cat").value;
-            const hourlyRate = parseFloat(document.getElementById("new-scooter-price").value);
-            const speed = parseInt(document.getElementById("new-scooter-speed").value);
-            const range = parseInt(document.getElementById("new-scooter-range").value);
-            const location = document.getElementById("new-scooter-loc").value;
-            let imgInput = document.getElementById("new-scooter-img").value.trim();
-
-            // Default fallback if input empty or broken html tag input
-            if(!imgInput || imgInput.includes("<a") || imgInput.includes("<img")) {
-                imgInput = DEFAULT_SCOOTER_IMG;
+            const select = document.getElementById('bookScooterSelect');
+            if (scooterId && select) {
+                select.value = scooterId;
             }
 
-            const newScooter = {
-                id: Date.now(),
-                name,
-                category,
-                hourlyRate,
-                speed,
-                range,
-                battery: 100,
-                status: "Available",
-                location,
-                image: imgInput
-            };
+            const today = new Date();
+            const tomorrow = new Date();
+            tomorrow.setDate(today.getDate() + 1);
 
-            fleetData.push(newScooter);
-            saveAndRefresh();
-            closeAddScooterModal();
-            showToast("New vehicle added successfully!");
-            e.target.reset();
-        }
+            document.getElementById('bookStartDate').value = today.toISOString().split('T')[0];
+            document.getElementById('bookEndDate').value = tomorrow.toISOString().split('T')[0];
 
-        function saveAndRefresh() {
-            localStorage.setItem("scooters_fleet", JSON.stringify(fleetData));
-            renderFleet();
-            populateCalculatorOptions();
-            renderAdminTable();
-        }
-
-        function bookScooterDirect(id) {
-            const scooter = fleetData.find(s => s.id === id);
-            if(scooter) {
-                document.getElementById("modal-pickup-location").value = `${scooter.name} - ${scooter.location}`;
-                openBookingModal();
-            }
-        }
-
-        function openBookingModal() {
-            document.getElementById("booking-modal").classList.remove("hidden");
+            calculateBookingTotal();
+            document.getElementById('bookingModal').classList.remove('hidden');
         }
 
         function closeBookingModal() {
-            document.getElementById("booking-modal").classList.add("hidden");
+            document.getElementById('bookingModal').classList.add('hidden');
         }
 
-        function openAddScooterModal() {
-            document.getElementById("add-modal").classList.remove("hidden");
-        }
+        function calculateBookingTotal() {
+            const scooterId = document.getElementById('bookScooterSelect').value;
+            const startStr = document.getElementById('bookStartDate').value;
+            const endStr = document.getElementById('bookEndDate').value;
 
-        function closeAddScooterModal() {
-            document.getElementById("add-modal").classList.add("hidden");
+            const scooter = appData.scooters.find(s => s.id === scooterId) || appData.scooters[0];
+            if (!scooter) return;
+
+            let days = 1;
+            if (startStr && endStr) {
+                const s = new Date(startStr);
+                const e = new Date(endStr);
+                const diffTime = e - s;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                days = diffDays > 0 ? diffDays : 1;
+            }
+
+            let ratePerDay = scooter.price1d;
+            if (days >= 4) {
+                ratePerDay = scooter.price4d;
+            } else if (days >= 2) {
+                ratePerDay = scooter.price2_3d;
+            }
+
+            const total = days * ratePerDay;
+            document.getElementById('daysCountText').textContent = `${days} jour(s) (${ratePerDay} DH/j)`;
+            document.getElementById('liveTotalPrice').textContent = `${total} DH`;
+
+            return { days, total, ratePerDay, scooter };
         }
 
         function handleBookingSubmit(e) {
             e.preventDefault();
-            closeBookingModal();
-            showToast("Reservation confirmed! Check your email for unlock keys.");
+            const calc = calculateBookingTotal();
+            const name = document.getElementById('bookName').value;
+            const phone = document.getElementById('bookPhone').value;
+            const delivery = document.getElementById('bookDelivery').value || "Agadir / Tamraght";
+            const start = document.getElementById('bookStartDate').value;
+            const end = document.getElementById('bookEndDate').value;
+
+            bookingRefCurrent = '#BK-' + Math.floor(1000 + Math.random() * 9000);
+
+            document.getElementById('summaryRef').textContent = bookingRefCurrent;
+            document.getElementById('summaryScooter').textContent = calc.scooter.name;
+            document.getElementById('summaryClient').textContent = `${name} (${phone})`;
+            document.getElementById('summaryDates').textContent = `${start} ➔ ${end} (${calc.days}j)`;
+            document.getElementById('summaryTotal').textContent = `${calc.total} DH`;
+
+            const waNum = (appData.phone || "").replace(/[^0-9]/g, "");
+            const msg = `Bonjour ${appData.companyName || 'BK MOTO'},%0A` +
+                `Je souhaite réserver un scooter:%0A` +
+                `• *Référence:* ${bookingRefCurrent}%0A` +
+                `• *Scooter:* ${calc.scooter.name}%0A` +
+                `• *Nom:* ${name}%0A` +
+                `• *Téléphone:* ${phone}%0A` +
+                `• *Période:* Du ${start} au ${end} (${calc.days} jour(s))%0A` +
+                `• *Livraison:* ${delivery}%0A` +
+                `• *Prix Estimé:* ${calc.total} DH%0A%0A` +
+                `Merci de me confirmer la disponibilité.`;
+
+            document.getElementById('whatsappSendBtn').href = `https://wa.me/${waNum}?text=${msg}`;
+
+            document.getElementById('bookingStep1').classList.add('hidden');
+            document.getElementById('bookingStep2').classList.remove('hidden');
         }
 
-        function showToast(message) {
-            const toast = document.getElementById("toast");
-            document.getElementById("toast-message").innerText = message;
-            toast.classList.remove("translate-y-20", "opacity-0", "pointer-events-none");
-            
-            setTimeout(() => {
-                toast.classList.add("translate-y-20", "opacity-0", "pointer-events-none");
-            }, 3500);
+        function backToStep1() {
+            document.getElementById('bookingStep2').classList.add('hidden');
+            document.getElementById('bookingStep1').classList.remove('hidden');
         }
+
+        function triggerAdminModal() {
+            document.getElementById('adminPinInput').value = '';
+            document.getElementById('adminAuthModal').classList.remove('hidden');
+        }
+
+        function closeAdminAuthModal() {
+            document.getElementById('adminAuthModal').classList.add('hidden');
+        }
+
+        function verifyAdminPin(e) {
+            e.preventDefault();
+            const entered = document.getElementById('adminPinInput').value;
+            const validPin = appData.adminPin || "1234";
+
+            if (entered === validPin) {
+                closeAdminAuthModal();
+                openAdminDashboardModal();
+                showToast("Accès Admin Autorisé");
+            } else {
+                showToast("Code PIN Incorrect!");
+            }
+        }
+
+        function openAdminDashboardModal() {
+            renderAdminDashboard();
+            document.getElementById('adminDashboardModal').classList.remove('hidden');
+        }
+
+        function closeAdminDashboardModal() {
+            document.getElementById('adminDashboardModal').classList.add('hidden');
+        }
+
+        function switchAdminTab(tab) {
+            if (tab === 'fleetTab') {
+                document.getElementById('adminTabFleet').classList.remove('hidden');
+                document.getElementById('adminTabSettings').classList.add('hidden');
+                document.getElementById('btnFleetTab').className = "px-4 py-2 rounded-xl bg-brand-500 text-slate-950 font-bold text-xs";
+                document.getElementById('btnSettingsTab').className = "px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs hover:bg-slate-700";
+            } else {
+                document.getElementById('adminTabFleet').classList.add('hidden');
+                document.getElementById('adminTabSettings').classList.remove('hidden');
+                document.getElementById('btnSettingsTab').className = "px-4 py-2 rounded-xl bg-brand-500 text-slate-950 font-bold text-xs";
+                document.getElementById('btnFleetTab').className = "px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs hover:bg-slate-700";
+
+                document.getElementById('adminSettingBrand').value = appData.companyName || "BK MOTO";
+                document.getElementById('adminSettingPhone').value = appData.phone || "+212 671-688844";
+                document.getElementById('adminSettingAddress').value = appData.address || "Hay Ait Soual, Tamraght Ouzdar, Aourir";
+                document.getElementById('adminSettingPin').value = appData.adminPin || "1234";
+            }
+        }
+
+        function renderAdminDashboard() {
+            const list = document.getElementById('adminScooterList');
+            list.innerHTML = '';
+
+            appData.scooters.forEach((s) => {
+                const row = document.createElement('div');
+                row.className = "p-5 bg-slate-950 rounded-2xl border border-slate-800 space-y-4";
+                row.innerHTML = `
+                    <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3">
+                        <div class="flex items-center gap-3">
+                            <img src="${s.image}" class="w-14 h-14 rounded-xl object-cover bg-slate-900 border border-slate-800">
+                            <div>
+                                <h5 class="font-bold text-white">${s.name}</h5>
+                                <span class="text-xs text-amber-400 font-mono">${s.price1d} DH / ${s.price2_3d} DH / ${s.price4d} DH</span>
+                            </div>
+                        </div>
+                        <button onclick="deleteScooterAdmin('${s.id}')" class="px-3 py-2 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 font-bold text-xs self-start sm:self-auto">
+                            <i class="fa-solid fa-trash mr-1"></i> Supprimer
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                        <div>
+                            <label class="text-slate-400 block mb-1">Nom du Scooter</label>
+                            <input type="text" value="${s.name}" onchange="updateScooterField('${s.id}', 'name', this.value)" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-white">
+                        </div>
+                        <div>
+                            <label class="text-slate-400 block mb-1">Photo (Upload ou Lien URL)</label>
+                            <div class="flex gap-2">
+                                <input type="text" value="${s.image}" onchange="updateScooterField('${s.id}', 'image', this.value)" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-white">
+                                <label class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg cursor-pointer flex items-center justify-center">
+                                    <i class="fa-solid fa-upload"></i>
+                                    <input type="file" accept="image/*" class="hidden" onchange="uploadScooterImage('${s.id}', event)">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-3 text-xs">
+                        <div>
+                            <label class="text-slate-400 block mb-1">Prix 1 Jour (DH)</label>
+                            <input type="number" value="${s.price1d}" onchange="updateScooterField('${s.id}', 'price1d', Number(this.value))" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-white">
+                        </div>
+                        <div>
+                            <label class="text-slate-400 block mb-1">Prix 2-3 Jours (DH)</label>
+                            <input type="number" value="${s.price2_3d}" onchange="updateScooterField('${s.id}', 'price2_3d', Number(this.value))" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-white">
+                        </div>
+                        <div>
+                            <label class="text-slate-400 block mb-1">Prix 4+ Jours (DH)</label>
+                            <input type="number" value="${s.price4d}" onchange="updateScooterField('${s.id}', 'price4d', Number(this.value))" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-white">
+                        </div>
+                    </div>
+                `;
+                list.appendChild(row);
+            });
+        }
+
+        function updateScooterField(id, key, val) {
+            const sc = appData.scooters.find(s => s.id === id);
+            if (sc) {
+                sc[key] = val;
+                saveAppData();
+                showToast("Modifications enregistrées");
+            }
+        }
+
+        function uploadScooterImage(id, event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    const maxW = 600;
+                    const scale = maxW / img.width;
+                    canvas.width = maxW;
+                    canvas.height = img.height * scale;
+
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    const compressedUrl = canvas.toDataURL('image/jpeg', 0.75);
+
+                    updateScooterField(id, 'image', compressedUrl);
+                    renderAdminDashboard();
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function addNewScooterAdmin() {
+            const newId = 'scooter_' + Date.now();
+            appData.scooters.push({
+                id: newId,
+                name: "Nouveau Scooter",
+                year: "2026",
+                image: "https://i.ibb.co/HTcWQ6kQ/IMG-1011.jpg" 
+                description: "Description du scooter...",
+                price1d: 200,
+                price2_3d: 200,
+                price4d: 170
+            });
+            saveAppData();
+            renderAdminDashboard();
+            showToast("Nouveau scooter ajouté");
+        }
+
+        function deleteScooterAdmin(id) {
+            if (appData.scooters.length <= 1) {
+                showToast("Impossible de tout supprimer!");
+                return;
+            }
+            appData.scooters = appData.scooters.filter(s => s.id !== id);
+            saveAppData();
+            renderAdminDashboard();
+            showToast("Scooter supprimé");
+        }
+
+        function saveAdminSettings() {
+            appData.companyName = document.getElementById('adminSettingBrand').value || "BK MOTO";
+            appData.phone = document.getElementById('adminSettingPhone').value || "+212 671-688844";
+            appData.address = document.getElementById('adminSettingAddress').value || "Hay Ait Soual, Tamraght Ouzdar, Aourir";
+            appData.adminPin = document.getElementById('adminSettingPin').value || "1234";
+
+            saveAppData();
+            showToast("Paramètres généraux sauvegardés!");
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toastNotification');
+            document.getElementById('toastMessage').textContent = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadAppData();
+            renderUI();
+        });
     </script>
 </body>
 </html>
