@@ -226,7 +226,7 @@ img{max-width:100%}.hero .w>*,.find>*,.two>*{min-width:0}
 
 <section class="promo" id="offre"><div class="w"><div class="pbox">
   <div><span class="pb" data-t="wk1">🔥 Offre semaine</span><h2 data-t="wk2">Loue 7 jours et +, paie 170 DH/jour</h2><p data-t="wk3">Le meilleur prix de BK Moto pour ta semaine de surf. Casque, top case, assurance et antivol inclus.</p><small class="pex" data-t="wk5">Exemples : 7 jours = 1 190 DH · 2 semaines (14 jours) = 2 240 DH (160 DH/jour)</small></div>
-  <div class="pr"><div class="pnum"><b>170</b><i data-t="pu">DH / jour</i></div><button class="btn" data-open="cap" data-t="wkb">Réserver ma semaine</button></div>
+  <div class="pr"><div class="pnum"><b>170</b><i data-t="pu">DH / jour</i></div><button class="btn" data-open="cap" data-week="1" data-t="wkb">Réserver ma semaine</button></div>
 </div></div></section>
 
 <section class="bkr" id="reserver"><div class="w">
@@ -386,7 +386,7 @@ function summary(){
   closeM();var w=window.open(u,"_blank");if(!w)location.href=u;
 }
 document.querySelectorAll("[data-img]").forEach(function(e){e.src=IMG[e.dataset.img]});
-document.querySelectorAll("[data-open]").forEach(function(b){b.onclick=function(){openM(b.dataset.open)}});
+document.querySelectorAll("[data-open]").forEach(function(b){b.onclick=function(){var t=iso(new Date());$("#d1").value=t;$("#d2").value=add(t,b.dataset.week?7:1);openM(b.dataset.open)}});
 document.querySelectorAll(".lang button").forEach(function(b){b.onclick=function(){setLang(b.dataset.l)}});
 var today=iso(new Date());
 $("#d1").min=today;$("#d1").value=today;$("#d2").min=add(today,1);$("#d2").value=add(today,1);
