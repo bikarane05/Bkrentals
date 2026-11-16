@@ -231,13 +231,17 @@ footer .lgb{font-size:13px;padding:5px 2px}
 .lang.open .lm{display:flex}
 .lm button{text-align:left;padding:10px 14px;font-size:14px;border-radius:12px}
 @media(max-width:480px){.lang button{padding:6px 10px}.lang .lt{padding:8px 12px 8px 14px}.lm button{padding:10px 14px}}
+.ov{overscroll-behavior:contain;touch-action:none}
+.md{overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y}
+nav,.fab{transform:translateZ(0)}
+.lang .lm{will-change:auto}
 </style>
 </head>
 <body>
 <nav>
   <a class="brand" href="#"><img data-img="logo" src="img/logo.jpg" alt="BK Moto" width="42" height="42"><span><b>BK Moto</b><small>Tamraght · Taghazout</small></span></a>
   <div class="lk"><a href="#flotte" data-t="nf">Scooters</a><a href="#tarifs" data-t="nt">Tarifs</a><a href="#infos" data-t="ni">Infos</a><a href="#contact" data-t="nc">Contact</a></div>
-  <div class="nr"><div class="lang" id="lang"><button class="lt" type="button" id="lt" aria-haspopup="true" aria-expanded="false" aria-label="Langue / Language"><span id="lc">FR</span></button><div class="lm" role="menu"><button data-l="fr" role="menuitem">Français</button><button data-l="en" role="menuitem">English</button><button data-l="de" role="menuitem">Deutsch</button></div></div><button class="btn sm" data-open="cap" data-t="bk">Réserver</button></div>
+  <div class="nr"><div class="lang" id="lang"><button class="lt" type="button" id="lgbtn" aria-haspopup="true" aria-expanded="false" aria-label="Langue / Language"><span id="lc">FR</span></button><div class="lm" role="menu"><button data-l="fr" role="menuitem">Français</button><button data-l="en" role="menuitem">English</button><button data-l="de" role="menuitem">Deutsch</button></div></div><button class="btn sm" data-open="cap" data-t="bk">Réserver</button></div>
 </nav>
 
 <header class="hero"><div class="w">
@@ -379,6 +383,10 @@ de:{"gh": "Wohin mit dem Roller?", "gl": "Unsere Ausflugsideen rund um Taghazout
 };
 var L="fr",ref="";
 function $(s){return document.querySelector(s)}
+var lockY=0,locked=0;
+function lockS(){if(locked)return;locked=1;lockY=window.pageYOffset;var b=document.body;b.style.position="fixed";b.style.top=-lockY+"px";b.style.left="0";b.style.right="0";b.style.width="100%"}
+function unlockS(){if(!locked)return;locked=0;var b=document.body;b.style.position=b.style.top=b.style.left=b.style.right=b.style.width="";window.scrollTo(0,lockY)}
+
 function iso(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
 function add(s,n){var d=new Date(s+"T12:00:00");d.setDate(d.getDate()+n);return iso(d)}
 function fmt(s){var p=s.split("-");return L=="de"?p[2]+"."+p[1]+"."+p[0]:p[2]+"/"+p[1]+"/"+p[0]}
@@ -400,14 +408,14 @@ function setLang(l){
   L=l;document.documentElement.lang=l;
   document.querySelectorAll("[data-t]").forEach(function(e){e.textContent=T[l][e.dataset.t]});
   document.querySelectorAll(".lm button").forEach(function(b){b.classList.toggle("on",b.dataset.l==l)});
-  $("#lc").textContent=l.toUpperCase();$("#lang").classList.remove("open");$("#lt").setAttribute("aria-expanded","false");
+  $("#lc").textContent=l.toUpperCase();$("#lang").classList.remove("open");$("#lgbtn").setAttribute("aria-expanded","false");
   var gm=l=="de"?"Hallo BK MOTO, ich hätte gern Informationen zur Rollermiete.":l=="en"?"Hello BK MOTO, I would like information about renting a scooter.":"Bonjour BK MOTO, je souhaite des informations pour louer un scooter.";
   document.querySelectorAll('a[href^="https://wa.me/"]').forEach(function(e){e.href="https://wa.me/"+PH+"?text="+encodeURIComponent(gm)});
   document.querySelectorAll(".cu").forEach(function(e){e.textContent=CU()});
   calc();wcalc();try{localStorage.setItem("l",l)}catch(e){}
 }
-function openM(k){$("#d1").min=iso(new Date());$("#sc").value=k;$("#s1").hidden=false;$("#s2").hidden=true;$("#er").textContent="";$("#ov").classList.add("on");document.body.style.overflow="hidden";calc()}
-function closeM(){$("#ov").classList.remove("on");document.body.style.overflow=""}
+function openM(k){$("#d1").min=iso(new Date());$("#sc").value=k;$("#s1").hidden=false;$("#s2").hidden=true;$("#er").textContent="";$("#ov").classList.add("on");lockS();calc()}
+function closeM(){$("#ov").classList.remove("on");unlockS()}
 function summary(){
   var c=calc(),nm=$("#nm").value.trim(),ph=$("#ph").value.trim();
   if(!nm||ph.replace(/\D/g,"").length<8||!c.n||$("#d1").value<iso(new Date())){$("#er").textContent=T[L].er;return}
@@ -424,9 +432,9 @@ function summary(){
 document.querySelectorAll("[data-img]").forEach(function(e){e.src=IMG[e.dataset.img]});
 document.querySelectorAll("[data-open]").forEach(function(b){b.onclick=function(){var t=iso(new Date());$("#d1").value=t;$("#d2").value=add(t,b.dataset.week?7:1);openM(b.dataset.open)}});
 document.querySelectorAll(".lm button").forEach(function(b){b.onclick=function(){setLang(b.dataset.l)}});
-$("#lt").onclick=function(e){e.stopPropagation();var o=$("#lang").classList.toggle("open");this.setAttribute("aria-expanded",o)};
-document.addEventListener("click",function(e){if(!e.target.closest("#lang")){$("#lang").classList.remove("open");$("#lt").setAttribute("aria-expanded","false")}});
-document.addEventListener("keydown",function(e){if(e.key=="Escape"){$("#lang").classList.remove("open");$("#lt").setAttribute("aria-expanded","false")}});
+$("#lgbtn").onclick=function(e){e.stopPropagation();var o=$("#lang").classList.toggle("open");this.setAttribute("aria-expanded",o)};
+document.addEventListener("click",function(e){if(!e.target.closest("#lang")){$("#lang").classList.remove("open");$("#lgbtn").setAttribute("aria-expanded","false")}});
+document.addEventListener("keydown",function(e){if(e.key=="Escape"){$("#lang").classList.remove("open");$("#lgbtn").setAttribute("aria-expanded","false")}});
 var today=iso(new Date());
 $("#d1").min=today;$("#d1").value=today;$("#d2").min=add(today,1);$("#d2").value=add(today,1);
 $("#d1").onchange=function(){var s=$("#d1").value||today;$("#d2").min=add(s,1);if(!$("#d2").value||$("#d2").value<=s)$("#d2").value=add(s,1);calc()};
@@ -450,9 +458,9 @@ function showLegal(k){
   var b=$("#lb");b.textContent="";
   d.s.forEach(function(x){var h=document.createElement("h4");h.textContent=x[0];var p=document.createElement("p");p.textContent=x[1];b.append(h,p)});
   if(d.ar){var ah=document.createElement("div");ah.className="arh";ah.textContent="النسخة العربية";b.append(ah);var aw=document.createElement("div");aw.className="ar";aw.lang="ar";aw.dir="rtl";d.ar.forEach(function(x){var h=document.createElement("h4");h.textContent=x[0];var p=document.createElement("p");p.textContent=x[1];aw.append(h,p)});b.append(aw)}
-  $("#lov").classList.add("on");document.body.style.overflow="hidden";$("#lov .md").scrollTop=0;
+  $("#lov").classList.add("on");lockS();$("#lov .md").scrollTop=0;
 }
-function closeL(){lgKey="";$("#lov").classList.remove("on");document.body.style.overflow=""}
+function closeL(){lgKey="";$("#lov").classList.remove("on");unlockS()}
 document.querySelectorAll("[data-legal]").forEach(function(b){b.onclick=function(){showLegal(b.dataset.legal)}});
 $("#lx").onclick=closeL;
 $("#lov").onclick=function(e){if(e.target===this)closeL()};
