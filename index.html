@@ -335,6 +335,29 @@ input,select{width:100%;min-width:0;min-height:50px;background:var(--bg);border:
   </div>
 </div></section>
 
+<section id="avis"><div class="w">
+  <h2>Ce que disent nos clients</h2>
+  <p class="lead">⭐ 5,0 sur Google · 23 avis. <a href="https://g.page/r/CYNU4XImYMJMEBM/review" target="_blank" rel="noopener" style="text-decoration:underline">Laisser un avis</a></p>
+  <div class="rv-grid">
+    <article class="rv-card"><div class="rv-top"><span class="rv-av" style="background:#3b7dd8">M</span><div><strong>Martin D.</strong><span class="rv-st">★★★★★</span></div></div><p>"Great experience renting a scooter in Tamraght. The bike was in awesome condition, super clean and ran smoothly..."</p></article>
+    <article class="rv-card"><div class="rv-top"><span class="rv-av" style="background:#8e44ad">S</span><div><strong>Siham E.</strong><span class="rv-st">★★★★★</span></div></div><p>"Impeccable service, very reliable motorcycles, and a warm welcome. Everything went perfectly from start to finish..."</p></article>
+    <article class="rv-card"><div class="rv-top"><span class="rv-av" style="background:#1f9a56">A</span><div><strong>Ali M.</strong><span class="rv-st">★★★★★</span></div></div><p>"Excellent service - reliable and trustworthy"</p></article>
+    <article class="rv-card"><div class="rv-top"><span class="rv-av" style="background:#6c3fc4">M</span><div><strong>Mandy E.</strong><span class="rv-st">★★★★★</span></div></div><p>"Good service, amazing scooters"</p></article>
+    <article class="rv-card"><div class="rv-top"><span class="rv-av" style="background:#12738b">T</span><div><strong>Thomas P.</strong><span class="rv-st">★★★★★</span></div></div><p>"Really great experience renting a scooter here! The owner was super nice and helpful. The scooters were spotless and looked brand new, and even the..."</p></article>
+    <article class="rv-card"><div class="rv-top"><span class="rv-av" style="background:#8b5e4b">L</span><div><strong>Lucy S.</strong><span class="rv-st">★★★★★</span></div></div><p>"Smooth rental, good bike, and nice service. Had a good time riding around town"</p></article>
+  </div>
+</div></section>
+<style>
+#avis{padding:90px 0}
+.rv-grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.rv-card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;transition:transform .25s,border-color .25s}
+.rv-card:hover{transform:translateY(-3px);border-color:var(--or)}
+.rv-top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.rv-top strong{display:block}
+.rv-av{width:40px;height:40px;flex:none;border-radius:50%;color:#fff;display:grid;place-items:center;font-weight:600}
+.rv-st{color:#f5b400;font-size:.95rem;letter-spacing:2px}
+.rv-card p{margin:0;color:var(--mut);line-height:1.5}
+</style>
 <section class="alt" id="balades"><div class="w">
   <h2 data-t="gh">Où aller en scooter ?</h2><p class="lead" data-t="gl">Nos idées de balades autour de Taghazout et d'Agadir, toutes faisables en scooter.</p>
   <p class="sw" data-t="gs">Glisse →</p>
@@ -546,6 +569,13 @@ setLang(sl);
     },{threshold:[0,.2,.4,.6],rootMargin:"200px 0px"}).observe(box);
   }else if(!rm){load();var p=v.play();if(p&&p.catch)p.catch(function(){})}
 })();
+</script>
+<script>
+var RV={fr:["Ce que disent nos clients","⭐ 5,0 sur Google · 23 avis.","Laisser un avis"],en:["What our customers say","⭐ 5.0 on Google · 23 reviews.","Leave a review"],de:["Das sagen unsere Kunden","⭐ 5,0 auf Google · 23 Bewertungen.","Bewertung schreiben"]};
+function applyRV(){var r=RV[L]||RV.fr;var s=document.querySelector("#avis");if(!s)return;s.querySelector("h2").textContent=r[0];s.querySelector(".lead").firstChild.textContent=r[1]+" ";s.querySelector(".lead a").textContent=r[2];}
+var _setLangRV=setLang;
+setLang=function(l){_setLangRV(l);applyRV()};
+applyRV();
 </script>
 </body>
 </html>
