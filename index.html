@@ -10,7 +10,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="#0f2438">
 <link rel="canonical" href="https://www.bkmotorentals.com/">
 <meta property="og:site_name" content="BK Moto">
 <meta property="og:url" content="https://www.bkmotorentals.com/">
@@ -26,8 +26,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#FFFFFF;--card:#F2F2F2;--fg:#000000;--mut:#666666;--line:#DDDDDD;--or:#FF073A;--nv:#000000;--tq:#007BFF;--sea:#CCE4FF;--land:#EEEEEE;color-scheme:light dark;box-sizing:border-box}
-@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#000000;--card:#0A0A0A;--fg:#FFFFFF;--mut:#A0A0A0;--line:#222222;--sea:#001A33;--land:#111111}}
+:root{--bg:#f7efe1;--card:#fffaf1;--fg:#10202f;--mut:#5e6b78;--line:#e4d6bd;--or:#ee7424;--nv:#0f2438;--tq:#12738b;--sea:#bfe3ea;--land:#f1dfbf;color-scheme:light dark;box-sizing:border-box}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0c1624;--card:#122338;--fg:#f6ecdb;--mut:#a3b1c2;--line:#233650;--sea:#12384a;--land:#1c2c3f}}
 *,*::before,*::after{box-sizing:inherit}
 html{scroll-behavior:smooth;scroll-padding-top:100px;overflow-x:clip}
 body{margin:0;background:var(--bg);color:var(--fg);font:400 17px/1.6 'DM Sans',system-ui,sans-serif;overflow-x:clip}
@@ -40,7 +40,7 @@ img{max-width:100%}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* Navigation */
-nav{position:fixed;z-index:20;top:calc(10px + env(safe-area-inset-top,0px));left:12px;right:12px;max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px;border-radius:99px;background:rgba(0,0,0,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.14);box-shadow:0 14px 40px rgba(8,18,32,.28);color:#fff;transform:translateZ(0)}
+nav{position:fixed;z-index:20;top:calc(10px + env(safe-area-inset-top,0px));left:12px;right:12px;max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px;border-radius:99px;background:rgba(15,36,56,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.14);box-shadow:0 14px 40px rgba(8,18,32,.28);color:#fff;transform:translateZ(0)}
 .brand{display:flex;align-items:center;gap:10px;min-width:0}
 .brand img{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid var(--or);flex:none}
 .brand b{font:800 19px/1 'Bricolage Grotesque',sans-serif;display:block}
@@ -80,12 +80,12 @@ nav{position:fixed;z-index:20;top:calc(10px + env(safe-area-inset-top,0px));left
 .hero p{max-width:42ch;color:var(--mut);font-size:19px;margin:22px 0 28px}
 .acts{display:flex;flex-wrap:wrap;gap:12px}
 .vis{position:relative;max-width:460px;width:100%;justify-self:center}
-.sun{position:absolute;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#FF073A,var(--or));top:-6%;right:-14%}
+.sun{position:absolute;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#ffb347,var(--or));top:-6%;right:-14%}
 .arch{position:relative;aspect-ratio:4/5;border-radius:999px 999px 30px 30px;overflow:hidden;border:6px solid var(--nv);background:var(--sea)}
 .arch img{width:100%;height:100%;object-fit:cover;object-position:50% 72%;display:block}
 .chip{position:absolute;background:var(--nv);color:#fff;border-radius:16px;padding:10px 16px;font-size:14px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
 .chip small{display:block;font-size:12px;font-weight:600;opacity:.85;margin-bottom:-2px}
-.chip b{display:block;font:800 22px 'Bricolage Grotesque',sans-serif;color:#FF073A}
+.chip b{display:block;font:800 22px 'Bricolage Grotesque',sans-serif;color:#ee7424}
 .c1{background:var(--or);color:#000000;max-width:215px;line-height:1.25;padding:12px 16px;left:auto;right:4%;bottom:9%;transform:rotate(4deg)}
 .c1 b{color:#000000;font-size:34px}
 .c1 b .cu{font-size:18px}
@@ -110,7 +110,7 @@ h2{font-size:clamp(36px,5.5vw,64px);margin-bottom:14px}
 .pbox h2{font-size:clamp(32px,5vw,54px);margin:0 0 12px}
 .pbox p{margin:0;color:#d3dce6;max-width:44ch}
 .pr{text-align:center}
-.pnum b{font:800 clamp(84px,16vw,120px)/1 'Bricolage Grotesque',sans-serif;color:#FF073A;display:block}
+.pnum b{font:800 clamp(84px,16vw,120px)/1 'Bricolage Grotesque',sans-serif;color:#ee7424;display:block}
 .pnum i{font-style:normal;display:block;font-weight:500}
 .pex{display:block;margin-top:14px;font-size:13px;color:#9fb0c6}
 .pr .btn{width:100%;margin-top:18px}
@@ -130,11 +130,11 @@ h2{font-size:clamp(36px,5.5vw,64px);margin-bottom:14px}
 .show>*{min-width:0}
 @media(min-width:900px){.show{grid-template-columns:1fr 360px;gap:80px}}
 .vwrap{position:relative;justify-self:center;width:min(100%,340px)}
-.sun2{position:absolute;width:62%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#FF073A,var(--or));top:-5%;left:-18%}
+.sun2{position:absolute;width:62%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#ffb347,var(--or));top:-5%;left:-18%}
 .vid{position:relative;aspect-ratio:9/16;border-radius:40px;overflow:hidden;border:6px solid var(--nv);background:var(--nv);box-shadow:0 24px 60px rgba(0,0,0,.28)}
 .vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .vp{position:absolute;inset:0;width:100%;background:none;border:0;cursor:pointer;display:grid;place-items:center;padding:0}
-.vid.paused .vp::before{content:"";width:70px;height:70px;border-radius:50%;background:rgba(0,0,0,.72);box-shadow:0 0 0 2px rgba(255,255,255,.5) inset;grid-area:1/1}
+.vid.paused .vp::before{content:"";width:70px;height:70px;border-radius:50%;background:rgba(15,36,56,.72);box-shadow:0 0 0 2px rgba(255,255,255,.5) inset;grid-area:1/1}
 .vid.paused .vp::after{content:"";grid-area:1/1;margin-left:6px;border-style:solid;border-width:12px 0 12px 20px;border-color:transparent transparent transparent #fff}
 .vt .acts{margin-top:6px}
 
@@ -146,7 +146,7 @@ h2{font-size:clamp(36px,5.5vw,64px);margin-bottom:14px}
 .gt{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .gt::-webkit-scrollbar{display:none}
 .gt img{flex:0 0 100%;width:100%;scroll-snap-align:start;margin:0}
-.gp,.gn{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:44px;height:44px;border-radius:50%;border:0;background:rgba(0,0,0,.72);color:#fff;font-size:28px;line-height:1;cursor:pointer;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:grid;place-items:center;transition:background .2s}
+.gp,.gn{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:44px;height:44px;border-radius:50%;border:0;background:rgba(15,36,56,.72);color:#fff;font-size:28px;line-height:1;cursor:pointer;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:grid;place-items:center;transition:background .2s}
 .gp:hover,.gn:hover{background:var(--or)}
 .gp{left:12px}.gn{right:12px}
 .gd{position:absolute;left:0;right:0;bottom:14px;z-index:2;display:flex;justify-content:center;gap:7px;pointer-events:none}
@@ -162,14 +162,14 @@ h2{font-size:clamp(36px,5.5vw,64px);margin-bottom:14px}
 .tier{position:relative;display:grid;grid-template-columns:minmax(84px,104px) 1fr auto;gap:14px;align-items:center;padding:18px;background:var(--bg);border:1px solid var(--line);border-radius:22px;transition:transform .25s,border-color .25s}
 .tier:hover{transform:translateX(4px);border-color:var(--or)}
 .tier .td{display:flex;flex-direction:column;align-items:flex-start;gap:6px;font-weight:600;font-size:15px;line-height:1.2}
-.tier .sv{font-style:normal;font-size:12px;font-weight:700;color:#000000;background:#FF073A;border-radius:99px;padding:2px 9px}
+.tier .sv{font-style:normal;font-size:12px;font-weight:700;color:#000000;background:#ee7424;border-radius:99px;padding:2px 9px}
 .tier .tbar{height:10px;border-radius:99px;background:rgba(127,127,127,.2);overflow:hidden}
-.tier .tbar u{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--or),#FF073A)}
+.tier .tbar u{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--or),#ee7424)}
 .tier .tp{text-align:right;line-height:1}
 .tier .tp b{display:block;font:800 clamp(28px,8vw,40px)/1 'Bricolage Grotesque',sans-serif}
 .tier .tp i{font-style:normal;font-size:12px;opacity:.75}
 .tier.best{border:2px solid var(--or);box-shadow:0 14px 34px -18px var(--or);margin-top:6px}
-.tier.best .tbar u{background:linear-gradient(90deg,#007BFF,var(--or))}
+.tier.best .tbar u{background:linear-gradient(90deg,#12738b,var(--or))}
 .tier .bst{position:absolute;top:-12px;right:18px;background:var(--or);color:#000000;font-size:12px;font-weight:700;border-radius:99px;padding:3px 12px}
 @media(max-width:420px){.tier{grid-template-columns:84px 1fr auto;gap:10px;padding:16px 14px}}
 .mo{max-width:760px;margin:22px 0 0;font-size:16px;line-height:1.5;opacity:.9}
@@ -208,7 +208,7 @@ li{padding:14px 0;border-bottom:1px solid var(--line)}
 .spot .sph{align-self:stretch;width:100%;height:112px;margin:-14px 0 8px;overflow:hidden;background:var(--line)}
 .spot .sph img{display:block;width:100%;height:100%;object-fit:cover}
 .spot .sph b{display:none;font-size:46px;line-height:1}
-.spot .sph.ne{display:grid;place-items:center;background:linear-gradient(135deg,#007BFF,var(--or))}
+.spot .sph.ne{display:grid;place-items:center;background:linear-gradient(135deg,#12738b,var(--or))}
 .spot .sph.ne b{display:block}
 .spot em{display:none}
 .spot h3{font-size:18px;padding:0 14px;margin:2px 0 0}
@@ -220,9 +220,9 @@ li{padding:14px 0;border-bottom:1px solid var(--line)}
 /* Footer & FAB */
 footer{background:var(--nv);color:#e9eef4;padding:50px 0 calc(100px + env(safe-area-inset-bottom,0px));text-align:center}
 footer b{font:800 34px 'Bricolage Grotesque',sans-serif;display:block;margin-bottom:6px}
-footer a{color:#FF073A}
+footer a{color:#ee7424}
 .lg{margin-top:26px;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center}
-.lgb{background:none;border:0;color:#FF073A;text-decoration:underline;cursor:pointer;padding:6px 4px;font-size:15px}
+.lgb{background:none;border:0;color:#ee7424;text-decoration:underline;cursor:pointer;padding:6px 4px;font-size:15px}
 .lgk{justify-content:flex-start;margin-top:14px}.lgk .lgb{padding-left:0}
 footer .lg{margin-top:18px;gap:2px 16px}
 footer .lgb{font-size:13px;padding:5px 2px}
@@ -245,7 +245,7 @@ input,select{width:100%;min-width:0;min-height:50px;background:var(--bg);border:
 .est{display:flex;justify-content:space-between;align-items:center;background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin:18px 0 12px}
 .est b{font:800 36px 'Bricolage Grotesque',sans-serif;color:var(--or)}
 .est small{color:var(--mut)}
-.er{color:#FF073A;font-size:14px;min-height:22px;margin:0 0 8px}
+.er{color:#ee7424;font-size:14px;min-height:22px;margin:0 0 8px}
 .row{display:flex;justify-content:space-between;gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}
 .row span:first-child{color:var(--mut)}.row span:last-child{text-align:end}
 .lnk{display:block;margin:14px auto 0;background:none;border:0;color:var(--mut);cursor:pointer}
@@ -344,7 +344,7 @@ input,select{width:100%;min-width:0;min-height:50px;background:var(--bg);border:
     <article class="rv-card"><div class="rv-top"><span class="rv-av" style="background:#8e44ad">S</span><div><strong>Siham E.</strong><span class="rv-st">★★★★★</span></div></div><p>"Impeccable service, very reliable motorcycles, and a warm welcome. Everything went perfectly from start to finish..."</p></article>
     <article class="rv-card"><div class="rv-top"><span class="rv-av" style="background:#1f9a56">A</span><div><strong>Ali M.</strong><span class="rv-st">★★★★★</span></div></div><p>"Excellent service - reliable and trustworthy"</p></article>
     <article class="rv-card"><div class="rv-top"><span class="rv-av" style="background:#6c3fc4">M</span><div><strong>Mandy E.</strong><span class="rv-st">★★★★★</span></div></div><p>"Good service, amazing scooters"</p></article>
-    <article class="rv-card"><div class="rv-top"><span class="rv-av" style="background:#007BFF">T</span><div><strong>Thomas P.</strong><span class="rv-st">★★★★★</span></div></div><p>"Really great experience renting a scooter here! The owner was super nice and helpful. The scooters were spotless and looked brand new, and even the..."</p></article>
+    <article class="rv-card"><div class="rv-top"><span class="rv-av" style="background:#12738b">T</span><div><strong>Thomas P.</strong><span class="rv-st">★★★★★</span></div></div><p>"Really great experience renting a scooter here! The owner was super nice and helpful. The scooters were spotless and looked brand new, and even the..."</p></article>
     <article class="rv-card"><div class="rv-top"><span class="rv-av" style="background:#8b5e4b">L</span><div><strong>Lucy S.</strong><span class="rv-st">★★★★★</span></div></div><p>"Smooth rental, good bike, and nice service. Had a good time riding around town"</p></article>
   </div>
 </div></section>
